@@ -16,9 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from wetterapp.views import home
+from wetterapp.views import home, weather, citys, userPage
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("home/", home),
+    path("home/", home, name="home"),
+    path("weather/", weather, name="weather"),
+    path("citys/", citys, name="citys"),
+    path("userpage/", userPage, name="userpage"),
 ]

@@ -1,5 +1,25 @@
-{% extends "base.html" %}
-{% block title %}  {% endblock %} <!-- Hier kann Webseite Titel bestimmt werden -->
+{% extends "base.html" %} {% block title %} Home {% endblock %}
+<!-- Hier kann Webseite Titel bestimmt werden -->
 {% block content %}
-    <h1>Home</h1>
+<h1>Home</h1>
+<div class="content-home">
+  <div class="content-home-text">
+    <h2>Herzlich Wilkommen auf der Wetterapp.</h2>
+    <h2>Hier können sie nachschauen wie das Wetter ist.</h2>
+  </div>
+  <div class="content-home-last-citys">
+    <h3>Letzte Suchergebnisse</h3>
+    <ul>
+      <li>Suchergebnis</li>
+      <li>Suchergebnis</li>
+    </ul>
+  </div>
+  <div class="content-home-favorite-citys">
+    <h3>Gespeicherte Orte</h3>
+    <ul>
+      <li>Ort</li>
+      <li>Ort</li>
+    </ul>
+  </div>
+</div>
 {% endblock %}
