@@ -7,6 +7,7 @@ body {
 }
 .header {
   background-color: lightgray;
+  padding: 20px;
 }
 .header h1 {
   margin-top: 0;
@@ -66,7 +67,7 @@ body {
     "temperature weather-icon"
     "pressure weather-icon"
     "condition weather-icon";
-    gap: 10px;
+  gap: 10px;
 }
 
 .weather-icon,
@@ -120,11 +121,10 @@ body {
   background-color: #c0c0c0;
 }
 
-.weather-information{
-
+.weather-information {
 }
 
-.weather-icon{
+.weather-icon {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -133,25 +133,25 @@ body {
   border-radius: 10px;
 }
 
-.weather-place{
+.weather-place {
   grid-area: place;
   background-color: lightgray;
   border-radius: 10px;
 }
 
-.weather-temperature{
+.weather-temperature {
   grid-area: temperature;
   background-color: lightgray;
   border-radius: 10px;
 }
 
-.weather-pressure{
+.weather-pressure {
   grid-area: pressure;
   background-color: lightgray;
   border-radius: 10px;
 }
 
-.weather-condition{
+.weather-condition {
   grid-area: condition;
   background-color: lightgray;
   border-radius: 10px;
@@ -171,18 +171,18 @@ body {
   text-align: center;
 }
 
-.content-userpage{
+.content-userpage {
   display: grid;
   grid-template-areas: "user-picture username button";
   align-items: center;
 }
 
-.user-picutre{
+.user-picutre {
   grid-area: user-picture;
   width: 150px;
 }
 
-.logout-button{
+.logout-button {
   grid-area: button;
   background-color: lightgray;
   height: 80px;
@@ -190,15 +190,19 @@ body {
   border-radius: 10px;
 }
 
-.logout-button:hover{
+.logout-button:hover {
   cursor: pointer;
   border: 1px solid black;
 }
 
-.logout-button:active{
+.logout-button:active {
   background-color: gray;
 }
 
-.username{
+.username {
   text-decoration: none;
+}
+
+.main{
+  padding: 20px;
 }

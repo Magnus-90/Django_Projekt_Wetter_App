@@ -1,0 +1,9 @@
+{% extends "base.html" %} {% block title %} Home {% endblock %}
+<!-- Hier kann Webseite Titel bestimmt werden -->
+{% block content %}
+<h1>Sign Up</h1>
+<form method="post">
+  {% csrf_token %} {{ form }}
+  <button type="submit">Sign Up</button>
+</form>
+{% endblock %}

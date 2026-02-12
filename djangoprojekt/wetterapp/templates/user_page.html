@@ -1,10 +1,28 @@
-{% extends "base.html" %}
-{% block title %} User Page {% endblock %} <!-- Hier kann Webseite Titel bestimmt werden -->
+{% extends "base.html" %} {% block title %} User Page {% endblock %}
+<!-- Hier kann Webseite Titel bestimmt werden -->
 {% block content %}
-    <h1>Account</h1>
-    <div class="content-userpage">
-        <img class="user-picutre" src="https://www.w3schools.com/howto/img_avatar.png" alt="User Icon">
-        <h4 class="username" href="">Username: </h4>
-        <button class="logout-button">Log Out</button>
-    </div>
-{% endblock %}
+<h1>Account</h1>
+<div class="content-userpage">
+  <img
+    class="user-picutre"
+    src="https://www.w3schools.com/howto/img_avatar.png"
+    alt="User Icon"
+  />
+  {% if user.is_authenticated %}
+  <h4 class="username" href="">Username: {{ user.username }}</h4>
+  <form action="{% url 'logout' %}" method="post">
+    {% csrf_token %}
+    <button class="logout-button" type="submit">Log Out</button>
+  </form>
+  <p><a href="{% url 'password_change' %}">Password Change</a></p>
+  <!-- <button class="logout-button">Log Out</button> -->
+</div>
+{% else %}
+<h2>Du hast dich noch nicht angemeldet</h2>
+<form action="{% url 'login' %}" method="post">
+    {% csrf_token %}
+    <button class="logout-button" type="submit">Log In</button>
+  </form>
+  <p><a href="{% url 'password_reset' %}">Password Reset</a></p>
+<!-- <a href="{% url 'login' %}">Log In</a> -->
+{% endif %} {% endblock %}

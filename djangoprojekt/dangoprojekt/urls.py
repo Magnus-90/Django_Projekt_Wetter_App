@@ -17,11 +17,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from wetterapp.views import home, weather, citys, userPage
+from django.urls import path, include
+from django.views.generic import TemplateView
 
 urlpatterns = [
+    path("", TemplateView.as_view(template_name="home.html"), name="home"),
     path('admin/', admin.site.urls),
-    path("home/", home, name="home"),
     path("weather/", weather, name="weather"),
     path("citys/", citys, name="citys"),
     path("userpage/", userPage, name="userpage"),
+    path("accounts/", include("django.contrib.auth.urls")),
+    path("accounts/", include("accounts.urls")),
 ]
