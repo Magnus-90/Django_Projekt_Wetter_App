@@ -23,6 +23,5 @@
     {% csrf_token %}
     <button class="logout-button" type="submit">Log In</button>
   </form>
-  <p><a href="{% url 'password_reset' %}">Password Reset</a></p>
-<!-- <a href="{% url 'login' %}">Log In</a> -->
+  <p><a href="{% url 'password_reset' %}">Password Vergessen?</a></p>
 {% endif %} {% endblock %}

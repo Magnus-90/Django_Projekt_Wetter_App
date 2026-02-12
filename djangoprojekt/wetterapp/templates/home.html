@@ -7,6 +7,7 @@
     <h2>Herzlich Wilkommen auf der Wetterapp.</h2>
     <h2>Hier können sie nachschauen wie das Wetter ist.</h2>
   </div>
+  {% if user.is_authenticated %}
   <div class="content-home-last-citys">
     <h3>Letzte Suchergebnisse</h3>
     <ul>
@@ -21,5 +22,19 @@
       <li>Ort</li>
     </ul>
   </div>
+  {% else %}
+  <div class="content-home-last-citys">
+    <h3>Letzte Suchergebnisse</h3>
+    <h3>Für dieses Feature muss du angemeldet sein. </h3>
+    {% csrf_token %}
+  <a href="{% url 'login' %}">Login</a>
+  </div>
+  <div class="content-home-favorite-citys">
+    <h3>Gespeicherte Orte</h3>
+    <h3>Für dieses Feature muss du angemeldet sein.</h3>
+    {% csrf_token %}
+  <a href="{% url 'login' %}">Login</a>
+  </div>
 </div>
+{% endif %}
 {% endblock %}
