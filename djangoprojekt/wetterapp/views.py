@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from .apimeteo import get_weather_data # apimeteo skript für Daten
 # Create your views here.
 def home(request):
     return render(request, "home.html")
