@@ -14,9 +14,10 @@ class User(models.Model):
 
 class City(models.Model):
     name = models.TextField(max_length=64)
-    country = models.TextField(max_length=64)
+    country = models.TextField(max_length=64, default="ch")
     latitude = models.TextField(max_length=64)
     longitude =models.TextField(max_length=64)
+    plz = models.IntegerField(null=True)
     def __str__(self):
         return str(self.id) + " " + self.name
     class Meta:

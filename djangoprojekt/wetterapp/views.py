@@ -7,6 +7,7 @@ def home(request):
     return render(request, "home.html")
 
 def weather(request):
+    # city_name = 'St.Gallen'
     weather_data = get_weather_data()
 
     timezone = pytz.timezone('Europe/Berlin')

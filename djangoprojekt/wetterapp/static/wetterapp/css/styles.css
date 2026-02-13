@@ -68,7 +68,7 @@ body {
     "temperature weather-icon-hour"
     "pressure weather-icon-hour"
     "condition weather-icon-hour"
-    "daily-text  daily-text"
+    "daily-text daily-text"
     "daily-min weather-icon-daily"
     "daily-max weather-icon-daily";
   gap: 10px;
