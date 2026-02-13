@@ -7,13 +7,16 @@
             <input type="text" placeholder="Suchfeld">
             <button type="button">Suchen</button>
         </div>
-        
-            <div class="weather-icon"><img src="" alt="Weather Icon"></div>
-            <div class="weather-place">Place:</div>
-            <div class="weather-temperature">Temperature:</div>
-            <div class="weather-pressure">Pressure:</div>
-            <div class="weather-condition">Condition:</div>
-            <!-- <div class="weather.diagram">Diagram</div> -->
-        
+        <div class="weather-hour-text"><h2>Stündliche Übersicht</h2></div>
+        <div class="weather-icon-hour" draggable="false"><img src="https://www.freeiconspng.com/uploads/weather-icon-png-5.png" alt="Weather Icon"></div>
+        <div class="weather-icon-daily" draggable="false"><img src="https://www.freeiconspng.com/uploads/weather-icon-png-5.png" alt="Weather Icon"></div>
+        <div class="weather-daily-text"><h2>Tages Übersicht</h2></div>
+        <div class="weather-daily-min-temp">Min Temperatur: {{ daily_min_temp }}°C</div>
+        <div class="weather-daily-max-temp">Max Temperatur: {{ daily_max_temp }}°C</div>
+        <div class="weather-place">Place: {{ coordinates.latitude }}°N {{ coordinates.longitude }}°E</div>
+        <div class="weather-temperature">Temperature: {{ current_temp }}°C</div>
+        <div class="weather-pressure">Pressure: {{ current_pressure }} hPa</div>
+        <div class="weather-condition">Condition: {{ current_condition }}</div>
+        <!-- <div class="weather.diagram">Diagram</div> -->
     </div>
 {% endblock %}

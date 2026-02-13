@@ -63,18 +63,51 @@ body {
   grid-template-columns: 2fr 1.5fr;
   grid-template-areas:
     "searchbar searchbar"
-    "place weather-icon"
-    "temperature weather-icon"
-    "pressure weather-icon"
-    "condition weather-icon";
+    "hour-text hour-text"
+    "place weather-icon-hour"
+    "temperature weather-icon-hour"
+    "pressure weather-icon-hour"
+    "condition weather-icon-hour"
+    "daily-text  daily-text"
+    "daily-min weather-icon-daily"
+    "daily-max weather-icon-daily";
   gap: 10px;
 }
 
-.weather-icon,
+.weather-hour-text {
+  grid-area: hour-text;
+  background-color: lightgray;
+  border-radius: 10px;
+}
+
+.weather-daily-text {
+  grid-area: daily-text;
+  background-color: lightgray;
+  border-radius: 10px;
+}
+
+.weather-daily-min-temp {
+  grid-area: daily-min;
+  background-color: lightgray;
+  border-radius: 10px;
+}
+
+.weather-daily-max-temp {
+  grid-area: daily-max;
+  background-color: lightgray;
+  border-radius: 10px;
+}
+
+.weather-icon-hour,
 .weather-place,
 .weather-temperature,
 .weather-pressure,
-.weather-condition {
+.weather-condition,
+.weather-hour-text,
+.weather-daily-text,
+.weather-daily-min-temp,
+.weather-daily-max-temp,
+.weather-icon-daily {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -121,14 +154,20 @@ body {
   background-color: #c0c0c0;
 }
 
-.weather-information {
-}
-
-.weather-icon {
+.weather-icon-daily {
   display: flex;
   justify-content: center;
   align-items: center;
-  grid-area: weather-icon;
+  grid-area: weather-icon-daily;
+  background-color: lightgray;
+  border-radius: 10px;
+}
+
+.weather-icon-hour {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-area: weather-icon-hour;
   background-color: lightgray;
   border-radius: 10px;
 }

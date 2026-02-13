@@ -77,5 +77,3 @@ def get_weather_data():
         'hourly': hourly_dataframe,
         'daily': daily_dataframe
     }
-
-get_weather_data()
