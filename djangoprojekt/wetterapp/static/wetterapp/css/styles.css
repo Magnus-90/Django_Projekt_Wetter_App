@@ -156,6 +156,13 @@ body {
   background-color: #c0c0c0;
 }
 
+.searchbar form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
 .weather-icon-daily {
   display: flex;
   justify-content: center;

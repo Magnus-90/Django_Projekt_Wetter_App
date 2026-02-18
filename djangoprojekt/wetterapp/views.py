@@ -8,8 +8,7 @@ def home(request):
     return render(request, "home.html")
 
 def weather(request):
-    # city_name = 'St.Gallen'
-    
+
     def get_condition_text(code):
         code = int(code)
         if code == 0:
@@ -31,7 +30,20 @@ def weather(request):
         else:
             return "Unbekannt"
         
-    weather_data = get_weather_data()
+
+    city_name = request.GET.get("city","")
+
+    if city_name:
+        try:
+            ort = City.objects.get(name__iexact=city_name)
+            latitude = ort.latitude
+            longitude = ort.longitude
+        except City.DoesNotExist:
+            return render(request, "weather.html", {"city_name": city_name, "city_found": False})
+        
+        weather_data = get_weather_data(latitude, longitude)
+    else:
+        return render(request, "weather.html", {"city_name": ""})
 
     timezone = pytz.timezone('Europe/Berlin')
     current_hour = datetime.now(timezone).hour
@@ -45,6 +57,7 @@ def weather(request):
     daily_condition = weather_data['daily_weather_code']
 
     data ={
+        "city_name": city_name,
         "temp_trend": "up" if temp_diff > 0 else "down",
         "current_condition_text": get_condition_text(current_condition_hour),
         "daily_condition_text": get_condition_text(daily_condition),
@@ -60,7 +73,6 @@ def weather(request):
         "daily": weather_data["daily"],
         "daily_condition": daily_condition
     }
-    # return render(request, "weather.html")
     return render(request, "weather.html", data)
 
 def citys(request):

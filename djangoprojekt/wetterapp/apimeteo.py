@@ -4,7 +4,7 @@ import pandas as pd
 import requests_cache
 from retry_requests import retry
 
-def get_weather_data():
+def get_weather_data(latitude, longitude):
 	# Setup the Open-Meteo API client with cache and retry on error
 	cache_session = requests_cache.CachedSession('.cache', expire_after = 3600)
 	retry_session = retry(cache_session, retries = 5, backoff_factor = 0.2)
@@ -14,8 +14,8 @@ def get_weather_data():
 	# The order of variables in hourly or daily is important to assign them correctly below
 	url = "https://api.open-meteo.com/v1/forecast"
 	params = {
-		"latitude": 47.3908,
-		"longitude": 9.3864,
+		"latitude": latitude,
+		"longitude": longitude,
 		"daily": ["weather_code", "temperature_2m_max", "temperature_2m_min"],
 		"hourly": ["temperature_2m", "weather_code", "surface_pressure"],
 		"models": "meteoswiss_icon_ch1",
@@ -26,10 +26,10 @@ def get_weather_data():
 
 	# Process first location. Add a for-loop for multiple locations or weather models
 	response = responses[0]
-	print(f"Coordinates: {response.Latitude()}°N {response.Longitude()}°E")
-	print(f"Elevation: {response.Elevation()} m asl")
-	print(f"Timezone: {response.Timezone()}{response.TimezoneAbbreviation()}")
-	print(f"Timezone difference to GMT+0: {response.UtcOffsetSeconds()}s")
+	# print(f"Coordinates: {response.Latitude()}°N {response.Longitude()}°E")
+	# print(f"Elevation: {response.Elevation()} m asl")
+	# print(f"Timezone: {response.Timezone()}{response.TimezoneAbbreviation()}")
+	# print(f"Timezone difference to GMT+0: {response.UtcOffsetSeconds()}s")
 
 	# Process hourly data. The order of variables needs to be the same as requested.
 	hourly = response.Hourly()
@@ -49,7 +49,7 @@ def get_weather_data():
 	hourly_data["surface_pressure"] = hourly_surface_pressure
 
 	hourly_dataframe = pd.DataFrame(data = hourly_data)
-	print("\nHourly data\n", hourly_dataframe)
+	# print("\nHourly data\n", hourly_dataframe)
 
 	# Process daily data. The order of variables needs to be the same as requested.
 	daily = response.Daily()
@@ -69,7 +69,7 @@ def get_weather_data():
 	daily_data["temperature_2m_min"] = daily_temperature_2m_min
 
 	daily_dataframe = pd.DataFrame(data = daily_data)
-	print("\nDaily data\n", daily_dataframe)
+	# print("\nDaily data\n", daily_dataframe)
 	return {
         'coordinates': {
             'latitude': response.Latitude(),
