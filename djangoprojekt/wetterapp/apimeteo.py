@@ -16,7 +16,7 @@ def get_weather_data():
 	params = {
 		"latitude": 47.3908,
 		"longitude": 9.3864,
-		"daily": ["temperature_2m_max", "temperature_2m_min"],
+		"daily": ["weather_code", "temperature_2m_max", "temperature_2m_min"],
 		"hourly": ["temperature_2m", "weather_code", "surface_pressure"],
 		"models": "meteoswiss_icon_ch1",
 		"timezone": "Europe/Berlin",
@@ -53,8 +53,9 @@ def get_weather_data():
 
 	# Process daily data. The order of variables needs to be the same as requested.
 	daily = response.Daily()
-	daily_temperature_2m_max = daily.Variables(0).ValuesAsNumpy()
-	daily_temperature_2m_min = daily.Variables(1).ValuesAsNumpy()
+	daily_weather_code = daily.Variables(0).ValuesAsNumpy()
+	daily_temperature_2m_max = daily.Variables(1).ValuesAsNumpy()
+	daily_temperature_2m_min = daily.Variables(2).ValuesAsNumpy()
 
 	daily_data = {"date": pd.date_range(
 		start = pd.to_datetime(daily.Time() + response.UtcOffsetSeconds(), unit = "s", utc = True),
@@ -63,6 +64,7 @@ def get_weather_data():
 		inclusive = "left"
 	)}
 
+	daily_data["weather_code"] = daily_weather_code
 	daily_data["temperature_2m_max"] = daily_temperature_2m_max
 	daily_data["temperature_2m_min"] = daily_temperature_2m_min
 
@@ -75,5 +77,6 @@ def get_weather_data():
             'elevation': response.Elevation()
         },
         'hourly': hourly_dataframe,
-        'daily': daily_dataframe
+        'daily': daily_dataframe,
+		'daily_weather_code': int(daily_weather_code[0]),
     }

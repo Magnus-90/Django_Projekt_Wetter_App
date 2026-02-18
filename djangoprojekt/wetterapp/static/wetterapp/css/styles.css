@@ -70,7 +70,8 @@ body {
     "condition weather-icon-hour"
     "daily-text daily-text"
     "daily-min weather-icon-daily"
-    "daily-max weather-icon-daily";
+    "daily-max weather-icon-daily"
+    "daily-condition weather-icon-daily";
   gap: 10px;
 }
 
@@ -107,7 +108,8 @@ body {
 .weather-daily-text,
 .weather-daily-min-temp,
 .weather-daily-max-temp,
-.weather-icon-daily {
+.weather-icon-daily,
+.weather-condition-daily {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -184,14 +186,30 @@ body {
   border-radius: 10px;
 }
 
+.weather-temperature img {
+  width: 100px;
+  height: 100px;
+}
+
 .weather-pressure {
   grid-area: pressure;
   background-color: lightgray;
   border-radius: 10px;
 }
 
+.weather-pressure img {
+  width: 100px;
+  height: 100px;
+}
+
 .weather-condition {
   grid-area: condition;
+  background-color: lightgray;
+  border-radius: 10px;
+}
+
+.weather-condition-daily {
+  grid-area: daily-condition;
   background-color: lightgray;
   border-radius: 10px;
 }

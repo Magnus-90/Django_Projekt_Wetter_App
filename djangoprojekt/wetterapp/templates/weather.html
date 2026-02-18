@@ -1,22 +1,77 @@
 {% extends "base.html" %}
 {% block title %} Weather {% endblock %} <!-- Hier kann Webseite Titel bestimmt werden -->
 {% block content %}
+{% load static %}
     <h1>Weather</h1>
     <div class="content-weather">
         <div class="searchbar">
             <input type="text" placeholder="Suchfeld">
-            <button type="button">Suchen</button>
+            <button type="submit">Suchen</button>
         </div>
         <div class="weather-hour-text"><h2>Stündliche Übersicht</h2></div>
-        <div class="weather-icon-hour" draggable="false"><img src="https://www.freeiconspng.com/uploads/weather-icon-png-5.png" alt="Weather Icon"></div>
-        <div class="weather-icon-daily" draggable="false"><img src="https://www.freeiconspng.com/uploads/weather-icon-png-5.png" alt="Weather Icon"></div>
+        <div class="weather-icon-hour" draggable="false">
+            {% if current_condition == 0 %}
+            <img src="{% static 'wetterapp/css/icons/clear-day.svg' %}?v=2" alt="Sunny" draggable="false">
+            {% elif current_condition == 1 %}
+            <img src="{% static 'wetterapp/css/icons/cloudy.svg' %}?v=2" alt="Mainly Cloudy" draggable="false">
+            {% elif current_condition == 2 %}
+            <img src="{% static 'wetterapp/css/icons/partly-cloudy-day.svg' %}?v=2" alt="Partly Cloudy" draggable="false">
+            {% elif current_condition == 3 %}
+            <img src="{% static 'wetterapp/css/icons/overcast.svg' %}?v=2" alt="Cloudy" draggable="false">
+            {% elif current_condition == 45 or current_condition == 48 %}
+            <img src="{% static 'wetterapp/css/icons/fog.svg' %}?v=2" alt="Foggy" draggable="false">
+            {% elif current_condition == 51 or current_condition == 53 or current_condition == 55 or current_condition == 61 or current_condition == 63 or current_condition == 65 %}
+            <img src="{% static 'wetterapp/css/icons/rain.svg' %}?v=2" alt="Rainy" draggable="false">
+            {% elif current_condition == 71 or current_condition == 73 or current_condition == 75 or current_condition == 77 %}
+            <img src="{% static 'wetterapp/css/icons/snow.svg' %}?v=2" alt="Snowy" draggable="false">
+            {% elif current_condition == 80 or current_condition == 81 or current_condition == 82 %}
+            <img src="{% static 'wetterapp/css/icons/rain.svg' %}?v=2" alt="Showers" draggable="false">
+            {% elif current_condition == 95 or current_condition == 96 or current_condition == 99 %}
+            <img src="{% static 'wetterapp/css/icons/thunderstorms.svg' %}?v=2" alt="Thunderstorm" draggable="false">
+            {% else %}
+            <img src="{% static 'wetterapp/css/icons/not-available.svg' %}?v=2" alt="Unknown">
+            {% endif %}
+            <!-- <img src="https://www.freeiconspng.com/uploads/weather-icon-png-5.png" alt="Weather Icon"> -->
+        </div>
+        <div class="weather-icon-daily" draggable="false">{% if daily_condition == 0 %}
+            <img src="{% static 'wetterapp/css/icons/clear-day.svg' %}?v=2" alt="Sunny" draggable="false">
+            {% elif daily_condition == 1 %}
+            <img src="{% static 'wetterapp/css/icons/cloudy.svg' %}?v=2" alt="Mainly Cloudy" draggable="false">
+            {% elif daily_condition == 2 %}
+            <img src="{% static 'wetterapp/css/icons/partly-cloudy-day.svg' %}?v=2" alt="Partly Cloudy" draggable="false">
+            {% elif daily_condition == 3 %}
+            <img src="{% static 'wetterapp/css/icons/overcast.svg' %}?v=2" alt="Cloudy" draggable="false">
+            {% elif daily_condition == 45 or daily_condition == 48 %}
+            <img src="{% static 'wetterapp/css/icons/fog.svg' %}?v=2" alt="Foggy" draggable="false">
+            {% elif daily_condition == 51 or daily_condition == 53 or daily_condition == 55 or daily_condition == 61 or daily_condition == 63 or daily_condition == 65 %}
+            <img src="{% static 'wetterapp/css/icons/rain.svg' %}?v=2" alt="Rainy" draggable="false">
+            {% elif daily_condition == 71 or daily_condition == 73 or daily_condition == 75 or daily_condition == 77 %}
+            <img src="{% static 'wetterapp/css/icons/snow.svg' %}?v=2" alt="Snowy" draggable="false">
+            {% elif daily_condition == 80 or daily_condition == 81 or daily_condition == 82 %}
+            <img src="{% static 'wetterapp/css/icons/rain.svg' %}?v=2" alt="Showers" draggable="false">
+            {% elif daily_condition == 95 or daily_condition == 96 or daily_condition == 99 %}
+            <img src="{% static 'wetterapp/css/icons/thunderstorms.svg' %}?v=2" alt="Thunderstorm" draggable="false">
+            {% else %}
+            <img src="{% static 'wetterapp/css/icons/not-available.svg' %}?v=2" alt="Unknown">
+            {% endif %}</div>
         <div class="weather-daily-text"><h2>Tages Übersicht</h2></div>
-        <div class="weather-daily-min-temp">Min Temperatur: {{ daily_min_temp }}°C</div>
-        <div class="weather-daily-max-temp">Max Temperatur: {{ daily_max_temp }}°C</div>
-        <div class="weather-place">Place: {{ coordinates.latitude }}°N {{ coordinates.longitude }}°E</div>
-        <div class="weather-temperature">Temperature: {{ current_temp }}°C</div>
-        <div class="weather-pressure">Pressure: {{ current_pressure }} hPa</div>
-        <div class="weather-condition">Condition: {{ current_condition }}</div>
-        <!-- <div class="weather.diagram">Diagram</div> -->
+        <div class="weather-daily-min-temp">Min Temperatur: {{ daily_min_temp|floatformat:1 }}°C</div>
+        <div class="weather-daily-max-temp">Max Temperatur: {{ daily_max_temp|floatformat:1 }}°C</div>
+        <div class="weather-place">Ort: {{ coordinates.latitude|floatformat:2 }}°N {{ coordinates.longitude|floatformat:2 }}°E</div>
+        <div class="weather-temperature">Temperatur: {{ current_temp|floatformat:1 }}°C
+            {% if current_temp > prev_temp %}
+            <img src="{% static 'wetterapp/css/icons/thermometer-warmer.svg' %}?v=2" alt="Warmer" draggable="false">
+            {% elif current_temp < prev_temp %}
+            <img src="{% static 'wetterapp/css/icons/thermometer-colder.svg' %}?v=2" alt="Colder" draggable="false">
+            {% else %}
+            <img src="{% static 'wetterapp/css/icons/thermometer-celsius.svg' %}?v=2" alt="Thermometer" draggable="false">
+            {% endif %}
+        </div>
+        <div class="weather-pressure">Druck: {{ current_pressure|floatformat:0 }} hPa
+            <img src="{% static 'wetterapp/css/icons/barometer.svg' %}?v=2" alt="Pressure-Icon" draggable="false">
+        </div>
+        <div class="weather-condition">Aktuelle Wetterlage: {{ current_condition_text }}</div>
+        <div class="weather-condition-daily">Tageswetterlage: {{ daily_condition_text }}</div>
+        <!-- <div class="weather-diagram">Diagram</div> -->
     </div>
 {% endblock %}
