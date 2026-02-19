@@ -74,7 +74,7 @@ def weather(request):
                     "username": request.user.username
                 }
             )
-        except (City.DoesNotExist, IndexError):
+        except (City.DoesNotExist, IndexError, AttributeError):
             return render(request, "weather.html", {"city_name": city_name, "city_found": False})
         
         weather_data = get_weather_data(latitude, longitude)
@@ -113,7 +113,13 @@ def weather(request):
 
 def cities(request):
     cities = City.objects.all()
-    return render(request, "cities.html", {"cities": cities})
+    search = request.GET.get("city","")
+    if search:
+        cities = City.objects.filter(name__icontains=search)
+    else:
+        cities = City.objects.all()
+    return render(request, "cities.html", {"cities": cities, "search": search})
+        
 
 def userPage(request):
     return render(request, "user_page.html")

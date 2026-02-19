@@ -3,8 +3,10 @@
 {% block content %}
     <h1>Cities</h1>
     <div class="searchbar">
-            <input type="text" placeholder="Suchfeld">
-            <button type="button">Suchen</button>
+        <form action="" method="GET">
+            <input type="text" name="city" placeholder="Suchfeld" value="{{ search }}">
+            <button type="submit">Suchen</button>
+        </form>
         </div>
     <div class="content-citys">
         {% for city in cities %}

@@ -12,7 +12,7 @@
     <h3>Letzte Suchergebnisse</h3>
     <ul>
       {% for city in last_cities %}
-        <li>{{ city.city.name }}</li>
+        <li><a href="{% url 'weather' %}?city={{ city.city.name }}">{{ city.city.name }}</a></li>
       {% endfor %}
     </ul>
   </div>
@@ -20,7 +20,7 @@
     <h3>Gespeicherte Orte</h3>
     <ul>
       {% for city in favorite_cities %}
-      <li>{{ city.city.name }}</li>
+      <li><a href="{% url 'weather' %}?city={{ city.city.name }}">{{ city.city.name }}</a></li>
       {% endfor %}
     </ul>
   </div>

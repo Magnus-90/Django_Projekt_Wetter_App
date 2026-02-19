@@ -11,9 +11,16 @@
                 <button type="submit">Suchen</button>
         </form>
         </div>
+        {% if city_found == False %}
+            <script>
+                alert("Ort: {{ city_name }} wurde nicht gefunden.")
+            </script>
+        {% endif %}
         <!-- Stündliche Übersicht Elemente -->
         <div class="weather-hour-text"><h2>Stündliche Übersicht</h2></div>
-        <div class="weather-place">Ort: {{ city_name }} <br> {{ coordinates.latitude|floatformat:2 }}°N {{ coordinates.longitude|floatformat:2 }}°E</div>
+        <div class="weather-place">Ort: {{ city_name }} <br> {{ coordinates.latitude|floatformat:2 }}°N {{ coordinates.longitude|floatformat:2 }}°E
+        <img src="{% static 'wetterapp/css/icons/compass.svg' %}?v=2" alt="Compass" draggable="false">
+        </div>
         <div class="weather-temperature">Temperatur: {{ current_temp|floatformat:1 }}°C
             {% if current_temp > prev_temp %}
             <img src="{% static 'wetterapp/css/icons/thermometer-warmer.svg' %}?v=2" alt="Warmer" draggable="false">
