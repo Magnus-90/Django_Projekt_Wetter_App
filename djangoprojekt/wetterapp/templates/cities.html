@@ -17,9 +17,14 @@
                 </div>
                 {% if user.is_authenticated %}
                 <div class="favorite-button">
-                    <button>
-                        Favorite
-                    </button>
+                    <form method="POST" action="{% url 'add_favorite' city.id %}">
+                        {% csrf_token %}
+                        <button type="submit">Favorite</button>
+                    </form>
+                    <form method="POST" action="{% url 'remove_favorite' city.id %}">
+                        {% csrf_token %}
+                        <button type="submit">Favorite Remove</button>
+                    </form>
                 </div>
                 {% else %}
                 <div class="favorite-button">

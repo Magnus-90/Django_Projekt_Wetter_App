@@ -1,16 +1,38 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .apimeteo import get_weather_data # apimeteo skript für Daten
 from datetime import datetime
-from .models import City, LastCities
+from .models import City, LastCities, FavoriteCities
 from django.utils import timezone
 import pytz
 # Create your views here.
+
+def add_favorite(request, city_id):
+    if request.method == "POST" and request.user.is_authenticated:
+        city = City.objects.get(id=city_id)
+        FavoriteCities.objects.get_or_create(
+            user=request.user,
+            city=city,
+            defaults={"username": request.user.username}
+        )
+    return redirect("cities")
+
+def remove_favorite(request, city_id):
+    if request.method == "POST" and request.user.is_authenticated:
+        city = City.objects.get(id=city_id)
+        FavoriteCities.objects.filter(
+            user=request.user,
+            city=city
+        ).delete()
+    return redirect("cities")
+
 def home(request):
     if request.user.is_authenticated:
         last_cities = LastCities.objects.filter(user=request.user).order_by("-vieweddate")[:5]
+        favorite_cities = FavoriteCities.objects.filter(user=request.user)
     else:
+        favorite_cities = []
         last_cities = []
-    return render(request, "home.html", {"last_cities": last_cities})
+    return render(request, "home.html", {"last_cities": last_cities, "favorite_cities": favorite_cities})
 
 def weather(request):
 
@@ -89,7 +111,7 @@ def weather(request):
     }
     return render(request, "weather.html", data)
 
-def citys(request):
+def cities(request):
     cities = City.objects.all()
     return render(request, "cities.html", {"cities": cities})
 

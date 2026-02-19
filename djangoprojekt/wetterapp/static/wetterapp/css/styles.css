@@ -42,6 +42,7 @@ body {
 }
 
 .content-home-favorite-citys {
+  text-align: center;
   grid-area: favorite;
   background-color: lightgray;
   border-radius: 10px;
@@ -262,11 +263,13 @@ body {
 
 .favorite-button,
 .city-name,
-.city-cordinates {
+.city-cordinates,
+.favorite-button button {
   display: flex;
   justify-items: center;
   align-items: center;
   margin: 10px;
+  mar
 }
 
 .favorite-button button {
