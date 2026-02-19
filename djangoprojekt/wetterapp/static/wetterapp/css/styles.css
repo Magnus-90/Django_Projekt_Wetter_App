@@ -75,6 +75,27 @@ body {
   gap: 10px;
 }
 
+@media (max-width: 600px) {
+  .content-weather {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "searchbar"
+    "hour-text"
+    "weather-icon-hour"
+    "place"
+    "temperature"
+    "pressure"
+    "condition"
+    "daily-text"
+    "weather-icon-daily"
+    "daily-min"
+    "daily-max"
+    "daily-condition";
+  gap: 10px;
+}
+}
+
 .weather-hour-text {
   grid-area: hour-text;
   background-color: lightgray;
@@ -229,10 +250,39 @@ body {
 }
 
 .city-item {
+  display: grid;
+  grid-template-columns: 2fr 2fr 0.5fr;
+  grid-template-areas: 
+  "city-name cordinates favorite-button";
   background-color: lightgray;
   border-radius: 10px;
   padding: 15px;
   text-align: center;
+}
+
+.favorite-button,
+.city-name,
+.city-cordinates {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  margin: 10px;
+}
+
+.favorite-button button {
+  border-radius: 10px;
+  background-color: rgb(185, 185, 185);
+  border: none;
+}
+
+.favorite-button button:hover {
+  border-radius: 10px;
+  background-color: rgb(231, 229, 229);
+}
+
+.favorite-button button:active {
+  border-radius: 10px;
+  background-color: rgb(185, 185, 185);
 }
 
 .content-userpage {

@@ -11,14 +11,14 @@
   <div class="content-home-last-citys">
     <h3>Letzte Suchergebnisse</h3>
     <ul>
-      <li>Suchergebnis</li>
-      <li>Suchergebnis</li>
+      {% for city in last_cities %}
+        <li>{{ city.city.name }}</li>
+      {% endfor %}
     </ul>
   </div>
   <div class="content-home-favorite-citys">
     <h3>Gespeicherte Orte</h3>
     <ul>
-      <li>Ort</li>
       <li>Ort</li>
     </ul>
   </div>

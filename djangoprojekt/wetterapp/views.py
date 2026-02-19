@@ -1,11 +1,16 @@
 from django.shortcuts import render
 from .apimeteo import get_weather_data # apimeteo skript für Daten
 from datetime import datetime
-from .models import City
+from .models import City, LastCities
+from django.utils import timezone
 import pytz
 # Create your views here.
 def home(request):
-    return render(request, "home.html")
+    if request.user.is_authenticated:
+        last_cities = LastCities.objects.filter(user=request.user).order_by("-vieweddate")[:5]
+    else:
+        last_cities = []
+    return render(request, "home.html", {"last_cities": last_cities})
 
 def weather(request):
 
@@ -35,18 +40,27 @@ def weather(request):
 
     if city_name:
         try:
-            ort = City.objects.get(name__iexact=city_name)
+            ort = City.objects.filter(name__iexact=city_name).first()
             latitude = ort.latitude
             longitude = ort.longitude
-        except City.DoesNotExist:
+            if request.user.is_authenticated:
+                LastCities.objects.update_or_create(
+                user=request.user,
+                city=ort,
+                defaults={
+                    "vieweddate": timezone.now(),
+                    "username": request.user.username
+                }
+            )
+        except (City.DoesNotExist, IndexError):
             return render(request, "weather.html", {"city_name": city_name, "city_found": False})
         
         weather_data = get_weather_data(latitude, longitude)
     else:
         return render(request, "weather.html", {"city_name": ""})
 
-    timezone = pytz.timezone('Europe/Berlin')
-    current_hour = datetime.now(timezone).hour
+    timezone_pytz = pytz.timezone('Europe/Berlin')
+    current_hour = datetime.now(timezone_pytz).hour
     current_temperature_hour = weather_data["hourly"]["temperature_2m"][current_hour]
     current_pressure_hour = weather_data["hourly"]["surface_pressure"][current_hour]
     current_condition_hour = weather_data["hourly"]["weather_code"][current_hour]
@@ -76,7 +90,8 @@ def weather(request):
     return render(request, "weather.html", data)
 
 def citys(request):
-    return render(request, "citys.html")
+    cities = City.objects.all()
+    return render(request, "cities.html", {"cities": cities})
 
 def userPage(request):
     return render(request, "user_page.html")

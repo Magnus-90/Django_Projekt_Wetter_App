@@ -7,7 +7,7 @@
     <title>Wetterapp {% block title %}{% endblock %}</title>
     <link
       rel="stylesheet"
-      href="{% static 'wetterapp/css/styles.css' %}?v=3"
+      href="{% static 'wetterapp/css/styles.css' %}?v=6"
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -23,7 +23,7 @@
       <nav class="nav">
         <a class="nav-buttons" onclick="" href="{% url 'home' %}">Home</a>
         <a class="nav-buttons" href="{% url 'weather' %}">Weather</a>
-        <a class="nav-buttons" href="{% url 'citys' %}">Citys</a>
+        <a class="nav-buttons" href="{% url 'citys' %}">Cities</a>
         <a class="nav-buttons" href="{% url 'userpage' %}">Account</a>
       </nav>
     </header>

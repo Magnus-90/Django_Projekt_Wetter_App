@@ -24,5 +24,17 @@
             "django": true,
             "justMyCode": true
         },
+        {
+            "name": "django Backend",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}\\djangoprojekt\\manage.py",
+            "console": "integratedTerminal",
+            "args": [
+                "runserver"
+            ],
+            "django": true,
+            "justMyCode": true
+        },
     ]
 }

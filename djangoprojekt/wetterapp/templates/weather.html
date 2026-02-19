@@ -2,6 +2,7 @@
 {% block title %} Weather {% endblock %} <!-- Hier kann Webseite Titel bestimmt werden -->
 {% block content %}
 {% load static %}
+{% if user.is_authenticated %}
     <h1>Weather</h1>
     <div class="content-weather">
         <div class="searchbar">
@@ -12,7 +13,7 @@
         </div>
         <!-- Stündliche Übersicht Elemente -->
         <div class="weather-hour-text"><h2>Stündliche Übersicht</h2></div>
-        <div class="weather-place">Ort: {{ coordinates.latitude|floatformat:2 }}°N {{ coordinates.longitude|floatformat:2 }}°E</div>
+        <div class="weather-place">Ort: {{ city_name }} <br> {{ coordinates.latitude|floatformat:2 }}°N {{ coordinates.longitude|floatformat:2 }}°E</div>
         <div class="weather-temperature">Temperatur: {{ current_temp|floatformat:1 }}°C
             {% if current_temp > prev_temp %}
             <img src="{% static 'wetterapp/css/icons/thermometer-warmer.svg' %}?v=2" alt="Warmer" draggable="false">
@@ -78,4 +79,20 @@
         </div>
         <!-- <div class="weather-diagram">Diagram</div> -->
     </div>
+{% else %}
+<h1>Weather</h1>
+    <div class="content-weather">
+        <div class="searchbar">
+            <form method="get">
+                <input name="city" type="text" placeholder="Suchfeld">
+                <button type="submit">Suchen</button>
+        </form>
+        </div>
+        <!-- Stündliche Übersicht Elemente -->
+        <div class="weather-hour-text">
+            <h2>Für dieses Feature musst du angemeldet sein. <a href="{% url 'login' %}"> Login</a></h2>
+        </div>
+            
+        
+{% endif %}
 {% endblock %}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %} Cities {% endblock %} <!-- Hier kann Webseite Titel bestimmt werden -->
+{% block content %}
+    <h1>Cities</h1>
+    <div class="searchbar">
+            <input type="text" placeholder="Suchfeld">
+            <button type="button">Suchen</button>
+        </div>
+    <div class="content-citys">
+        {% for city in cities %}
+            <div class="city-item">
+                <div class="city-name">
+                    {{ city.name }}
+                </div>
+                <div class="city-cordinates">
+                    {{ city.latitude|floatformat:2 }}°N, {{ city.longitude|floatformat:2 }}°E
+                </div>
+                {% if user.is_authenticated %}
+                <div class="favorite-button">
+                    <button>
+                        Favorite
+                    </button>
+                </div>
+                {% else %}
+                <div class="favorite-button">
+                    <p>
+                        Für Favoriten müssen sie angemeldet sein.
+                    </p>
+                </div>
+                {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
