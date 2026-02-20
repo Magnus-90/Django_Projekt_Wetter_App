@@ -1,8 +1,7 @@
 {% extends "base.html" %}
-{% block title %} Weather {% endblock %} <!-- Hier kann Webseite Titel bestimmt werden -->
+{% block title %} Weather {% endblock %}
 {% block content %}
 {% load static %}
-{% if user.is_authenticated %}
     <h1>Weather</h1>
     <div class="content-weather">
         <div class="searchbar">
@@ -84,22 +83,5 @@
             <img src="{% static 'wetterapp/css/icons/not-available.svg' %}?v=2" alt="Unknown">
             {% endif %}
         </div>
-        <!-- <div class="weather-diagram">Diagram</div> -->
     </div>
-{% else %}
-<h1>Weather</h1>
-    <div class="content-weather">
-        <div class="searchbar">
-            <form method="get">
-                <input name="city" type="text" placeholder="Suchfeld">
-                <button type="submit">Suchen</button>
-        </form>
-        </div>
-        <!-- Stündliche Übersicht Elemente -->
-        <div class="weather-hour-text">
-            <h2>Für dieses Feature musst du angemeldet sein. <a href="{% url 'login' %}"> Login</a></h2>
-        </div>
-            
-        
-{% endif %}
 {% endblock %}

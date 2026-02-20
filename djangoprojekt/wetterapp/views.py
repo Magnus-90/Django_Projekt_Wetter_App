@@ -1,10 +1,9 @@
 from django.shortcuts import render, redirect
-from .apimeteo import get_weather_data # apimeteo skript für Daten
+from .apimeteo import get_weather_data
 from datetime import datetime
 from .models import City, LastCities, FavoriteCities
 from django.utils import timezone
 import pytz
-# Create your views here.
 
 def add_favorite(request, city_id):
     if request.method == "POST" and request.user.is_authenticated:
@@ -99,7 +98,6 @@ def weather(request):
         "daily_condition_text": get_condition_text(daily_condition),
         "prev_temp": previous_temperature_hour,
         "current_temp": current_temperature_hour,
-        "current_temp": current_temperature_hour,
         "current_pressure": current_pressure_hour,
         "current_condition": current_condition_hour,
         "daily_min_temp": daily_min_temperature,
@@ -112,7 +110,6 @@ def weather(request):
     return render(request, "weather.html", data)
 
 def cities(request):
-    cities = City.objects.all()
     search = request.GET.get("city","")
     if search:
         cities = City.objects.filter(name__icontains=search)

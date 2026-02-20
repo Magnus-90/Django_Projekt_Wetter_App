@@ -1,5 +1,4 @@
 {% extends "base.html" %} {% block title %} User Page {% endblock %}
-<!-- Hier kann Webseite Titel bestimmt werden -->
 {% block content %}
 <h1>Account</h1>
 <div class="content-userpage">
@@ -14,7 +13,7 @@
     {% csrf_token %}
     <button class="logout-button" type="submit">Log Out</button>
   </form>
-  <p><a href="{% url 'password_change' %}">Password Change</a></p>
+  <p><a href="{% url 'password_change' %}">Passwort ändern</a></p>
 </div>
 {% else %}
 <h2>Du hast dich noch nicht angemeldet</h2>
@@ -22,5 +21,5 @@
     {% csrf_token %}
     <button class="logout-button" type="submit">Log In</button>
   </form>
-  <p><a href="{% url 'password_reset' %}">Password Vergessen?</a></p>
+  <p><a href="{% url 'password_reset' %}">Passwort Vergessen?</a></p>
 {% endif %} {% endblock %}

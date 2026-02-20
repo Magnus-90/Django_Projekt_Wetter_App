@@ -18,7 +18,6 @@ from django.contrib import admin
 from django.urls import path
 from wetterapp.views import home, weather, cities, userPage
 from django.urls import path, include
-from django.views.generic import TemplateView
 from wetterapp.views import home, weather, cities, userPage, add_favorite, remove_favorite
 
 urlpatterns = [

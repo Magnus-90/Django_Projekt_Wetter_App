@@ -1,11 +1,12 @@
 {% extends "base.html" %} {% block title %} Home {% endblock %}
-<!-- Hier kann Webseite Titel bestimmt werden -->
 {% block content %}
+{% load static %}
 <h1>Home</h1>
 <div class="content-home">
   <div class="content-home-text">
     <h2>Herzlich Wilkommen auf der Wetterapp.</h2>
     <h2>Hier können sie nachschauen wie das Wetter ist.</h2>
+    <img src="{% static 'wetterapp/css/icons/partly-cloudy-day.svg' %}?v=2" alt="Weather Icon">
   </div>
   {% if user.is_authenticated %}
   <div class="content-home-last-citys">
