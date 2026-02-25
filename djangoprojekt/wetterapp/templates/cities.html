@@ -12,7 +12,7 @@
         {% for city in cities %}
             <div class="city-item">
                 <div class="city-name">
-                    {{ city.name }}
+                    <a href="{% url 'weather' %}?city={{ city.name }}">{{city.name}}</a>
                 </div>
                 <div class="city-cordinates">
                     {{ city.latitude|floatformat:2 }}°N, {{ city.longitude|floatformat:2 }}°E

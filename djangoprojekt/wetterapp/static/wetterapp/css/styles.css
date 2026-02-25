@@ -93,8 +93,91 @@ body {
     "daily-text daily-text"
     "daily-min weather-icon-daily"
     "daily-max weather-icon-daily"
-    "daily-condition weather-icon-daily";
+    "daily-condition weather-icon-daily"
+    "weather-diagram-temp weather-diagram-temp"
+    "weather-diagram-precipitation weather-diagram-precipitation"
+    "weather-sunrise weather-sunset"
+    "weather-wind-speed weather-wind-speed-icon";
   gap: 10px;
+}
+
+.weather-sunrise{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-area: weather-sunrise;
+  background-color: lightgray;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.weather-sunrise img{
+  height: 150px;
+  width: 150px;
+}
+
+.weather-sunset img{
+  height: 150px;
+  width: 150px;
+}
+
+.weather-sunset{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-area: weather-sunset;
+  background-color: lightgray;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.weather-diagram-temp{
+  grid-area: weather-diagram-temp;
+  background-color: lightgray;
+  border-radius: 10px;
+  padding: 15px;
+  height: 450px;
+  position: relative;
+}
+
+.weather-diagram canvas{
+  height: 450px;
+  width: 100%;
+}
+
+.weather-diagram-precipitation{
+  grid-area: weather-diagram-precipitation;
+  background-color: lightgray;
+  border-radius: 10px;
+  padding: 15px;
+  height: 450px;
+  position: relative;
+}
+
+.weather-wind-speed{
+  display: grid;
+  background-color: lightgray;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  grid-area: weather-wind-speed;
+  padding: 15px;
+}
+
+.weather-wind-speed-text{
+  display: flex;
+  grid-area: text;
+  justify-content: center;
+  align-items: center;
+}
+
+.weather-wind-speed-icon{
+  display: flex;
+  grid-area: weather-wind-speed-icon;
+  justify-content: center;
+  align-items: center;
+  background-color: lightgray;
+  border-radius: 10px;
 }
 
 @media (max-width: 600px) {
@@ -113,8 +196,20 @@ body {
     "weather-icon-daily"
     "daily-min"
     "daily-max"
-    "daily-condition";
+    "daily-condition"
+    "weather-sunrise"
+    "weather-sunset"
+    "weather-wind-speed"
+    "weather-wind-speed-icon";
   gap: 10px;
+}
+
+.weather-diagram-temp{
+  display: none;
+}
+
+.weather-diagram-precipitation{
+  display: none;
 }
 }
 

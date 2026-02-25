@@ -12,7 +12,7 @@
         </div>
         {% if city_found == False %}
             <script>
-                alert("Ort: {{ city_name }} wurde nicht gefunden.")
+                alert("Ort: {{ city_name }} wurde nicht gefunden. Bitte beachte das man nur Schweizer Orte suchen kann z.B Zürich.")
             </script>
         {% endif %}
         <!-- Stündliche Übersicht Elemente -->
@@ -53,14 +53,95 @@
             {% elif current_condition == 95 or current_condition == 96 or current_condition == 99 %}
             <img src="{% static 'wetterapp/css/icons/thunderstorms.svg' %}?v=2" alt="Thunderstorm" draggable="false">
             {% else %}
-            <img src="{% static 'wetterapp/css/icons/not-available.svg' %}?v=2" alt="Unknown">
+            <img src="{% static 'wetterapp/css/icons/not-available.svg' %}?v=2" alt="Unknown" draggable="false">
             {% endif %}
         </div>
+        <div class="weather-wind-speed">Windgeschwindigkeit: {{ hourly_wind|floatformat:2 }} km/h</div>
+        <div class="weather-wind-speed-icon">
+            <img src="{% static 'wetterapp/css/icons/wind-beaufort-' %}{{ beaufort }}.svg" alt="Beaufort {{ beaufort }} Icon">
+        </div>
+        {% if hourly_temps %}
+        <div class="weather-diagram-temp">
+            <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0"></script>
+            <canvas class="weather-temp-diagram" id="myChart"></canvas>
+            <script>
+                const xValuestemperture = ["0 Uhr","1 Uhr","2 Uhr","3 Uhr","4 Uhr","5 Uhr","6 Uhr","7 Uhr","8 Uhr","9 Uhr","10 Uhr","11 Uhr","12 Uhr","13 Uhr","14 Uhr","15 Uhr","16 Uhr","17 Uhr","18 Uhr","19 Uhr","20 Uhr","21 Uhr","22 Uhr","23 Uhr"];
+                const yValuestemperature = {{ hourly_temps }};
+                const ctxtemperature = document.getElementById('myChart');
+
+                new Chart(ctxtemperature, {
+                  type: "line",
+                  data: {
+                    labels: xValuestemperture,
+                    datasets: [{
+                      fill: false,
+                      lineTension: 0.1,
+                      backgroundColor: "rgba(0,0,255,1.0)",
+                      borderColor: "rgba(0,0,255,0.1)",
+                      data: yValuestemperature
+                    }]
+                  },
+                  options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                      legend: {display:false},
+                      title: {
+                        display: true,
+                        text: "Temperatur Verlauf",
+                        font: {size:16}
+                      }
+                    }
+                  }
+                });
+            </script>
+        </div>
+        <div class="weather-diagram-precipitation">
+            <canvas class="weather-precipitation-diagram" id="myChart-precipitation"></canvas>
+            <script>
+                const xValuesprecipitation = ["0 Uhr","1 Uhr","2 Uhr","3 Uhr","4 Uhr","5 Uhr","6 Uhr","7 Uhr","8 Uhr","9 Uhr","10 Uhr","11 Uhr","12 Uhr","13 Uhr","14 Uhr","15 Uhr","16 Uhr","17 Uhr","18 Uhr","19 Uhr","20 Uhr","21 Uhr","22 Uhr","23 Uhr"];
+                const yValuesprecipitation = {{ hourly_precipitation }};
+                const ctxprecipitation = document.getElementById('myChart-precipitation');
+
+                new Chart(ctxprecipitation, {
+                  type: "line",
+                  data: {
+                    labels: xValuesprecipitation,
+                    datasets: [{
+                      fill: false,
+                      lineTension: 0.1,
+                      backgroundColor: "rgba(0,0,255,1.0)",
+                      borderColor: "rgba(0,0,255,0.1)",
+                      data: yValuesprecipitation
+                    }]
+                  },
+                  options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                      legend: {display:false},
+                      title: {
+                        display: true,
+                        text: "Niederschlag",
+                        font: {size:16}
+                      }
+                    }
+                  }
+                });
+            </script>
+        </div>
+        {% endif %}
         <!-- Tägliche Übersicht Elemente -->
         <div class="weather-daily-text"><h2>Tages Übersicht</h2></div>
         <div class="weather-daily-min-temp">Min Temperatur: {{ daily_min_temp|floatformat:1 }}°C</div>
         <div class="weather-daily-max-temp">Max Temperatur: {{ daily_max_temp|floatformat:1 }}°C</div>
         <div class="weather-condition-daily">Tageswetterlage: {{ daily_condition_text }}</div>
+        <div class="weather-sunrise">Sonnenaufgang: {{ sunrise|time:"H:i" }}
+            <img src="{% static 'wetterapp/css/icons/sunrise.svg' %}?v=2" alt="Sunrise Icon">
+        </div>
+        <div class="weather-sunset">Sonnenuntergang: {{ sunset|time:"H:i" }}
+            <img src="{% static 'wetterapp/css/icons/sunset.svg' %}?v=2" alt="Sunset Icon">
+        </div>
         <div class="weather-icon-daily" draggable="false">{% if daily_condition == 0 %}
             <img src="{% static 'wetterapp/css/icons/clear-day.svg' %}?v=2" alt="Sunny" draggable="false">
             {% elif daily_condition == 1 %}
@@ -80,7 +161,7 @@
             {% elif daily_condition == 95 or daily_condition == 96 or daily_condition == 99 %}
             <img src="{% static 'wetterapp/css/icons/thunderstorms.svg' %}?v=2" alt="Thunderstorm" draggable="false">
             {% else %}
-            <img src="{% static 'wetterapp/css/icons/not-available.svg' %}?v=2" alt="Unknown">
+            <img src="{% static 'wetterapp/css/icons/not-available.svg' %}?v=2" alt="Unknown" draggable="false">
             {% endif %}
         </div>
     </div>

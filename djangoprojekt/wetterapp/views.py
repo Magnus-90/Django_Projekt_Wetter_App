@@ -3,6 +3,7 @@ from .apimeteo import get_weather_data
 from datetime import datetime
 from .models import City, LastCities, FavoriteCities
 from django.utils import timezone
+from datetime import datetime
 import pytz
 
 def add_favorite(request, city_id):
@@ -56,6 +57,33 @@ def weather(request):
         else:
             return "Unbekannt"
         
+    def get_beaufort(wind_kmh):
+        if wind_kmh < 1:
+            return 0
+        elif wind_kmh <= 5:
+            return 1
+        elif wind_kmh <= 11:
+            return 2
+        elif wind_kmh <= 19:
+            return 3
+        elif wind_kmh <= 28:
+            return 4
+        elif wind_kmh <= 38:
+            return 5
+        elif wind_kmh <= 49:
+            return 6
+        elif wind_kmh <= 61:
+            return 7
+        elif wind_kmh <= 74:
+            return 8
+        elif wind_kmh <= 88:
+            return 9
+        elif wind_kmh <= 102:
+            return 10
+        elif wind_kmh <= 117:
+            return 11
+        else:
+            return 12
 
     city_name = request.GET.get("city","")
 
@@ -90,6 +118,12 @@ def weather(request):
     daily_min_temperature = weather_data["daily"]["temperature_2m_min"][0]
     daily_max_temperature = weather_data["daily"]["temperature_2m_max"][0]
     daily_condition = weather_data['daily_weather_code']
+    hourly_temps = weather_data["hourly"]["temperature_2m"].tolist()
+    hourly_precipitation = weather_data["hourly"]["precipitation"].tolist()
+    hourly_wind = weather_data["hourly"]["wind_speed_10m"][current_hour]
+    daily_sunrise = weather_data["daily"]["sunrise"][0]
+    daily_sunset = weather_data["daily"]["sunset"][0]
+    beaufort = get_beaufort(hourly_wind)
 
     data ={
         "city_name": city_name,
@@ -105,7 +139,13 @@ def weather(request):
         "coordinates": weather_data["coordinates"],
         "hourly" : weather_data["hourly"],
         "daily": weather_data["daily"],
-        "daily_condition": daily_condition
+        "daily_condition": daily_condition,
+        "hourly_temps": hourly_temps,
+        "hourly_precipitation": hourly_precipitation,
+        "hourly_wind": hourly_wind,
+        "sunrise": daily_sunrise,
+        "sunset": daily_sunset,
+        "beaufort": beaufort
     }
     return render(request, "weather.html", data)
 
