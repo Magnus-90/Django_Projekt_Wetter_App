@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .apimeteo import get_weather_data
+from .uv_index_skript import get_uv_index
 from datetime import datetime
 from .models import City, LastCities, FavoriteCities
 from django.utils import timezone
@@ -84,6 +85,43 @@ def weather(request):
             return 11
         else:
             return 12
+        
+
+    def get_uv_category(uv):
+        if uv is None:
+            return "Keine Daten"
+        elif uv < 2:
+            return "Niedrig"
+        elif uv < 5:
+            return "Mittel"
+        elif uv < 7:
+            return "Hoch"
+        elif uv < 10:
+            return "Sehr Hoch"
+        else:
+            return "Extrem"
+        
+    def get_current_condition(code):
+        match code:
+            case 0:
+                return "clear-day"
+            case 1:
+                return "cloudy"
+            case 2:
+                return "partly-cloudy-day"
+            case 3:
+                return "overcast"
+            case 45 | 48:
+                return "fog"
+            case 51 | 53 | 55 | 61 | 63 | 65 | 80 | 81 | 82:
+                return "rain"
+            case 71 | 73 | 75 | 77:
+                return "snow"
+            case 95 | 96 | 99:
+                return "thunderstorms"
+            case _ :
+                return "not-available"
+
 
     city_name = request.GET.get("city","")
 
@@ -105,6 +143,7 @@ def weather(request):
             return render(request, "weather.html", {"city_name": city_name, "city_found": False})
         
         weather_data = get_weather_data(latitude, longitude)
+        uv_index = get_uv_index(latitude, longitude)
     else:
         return render(request, "weather.html", {"city_name": ""})
 
@@ -130,6 +169,8 @@ def weather(request):
         "temp_trend": "up" if temp_diff > 0 else "down",
         "current_condition_text": get_condition_text(current_condition_hour),
         "daily_condition_text": get_condition_text(daily_condition),
+        "condition_icon_hourly": get_current_condition(current_condition_hour),
+        "condition_icon_daily": get_current_condition(daily_condition),
         "prev_temp": previous_temperature_hour,
         "current_temp": current_temperature_hour,
         "current_pressure": current_pressure_hour,
@@ -145,7 +186,9 @@ def weather(request):
         "hourly_wind": hourly_wind,
         "sunrise": daily_sunrise,
         "sunset": daily_sunset,
-        "beaufort": beaufort
+        "beaufort": beaufort,
+        "uv_index": uv_index,
+        "uv_category": get_uv_category(uv_index)
     }
     return render(request, "weather.html", data)
 

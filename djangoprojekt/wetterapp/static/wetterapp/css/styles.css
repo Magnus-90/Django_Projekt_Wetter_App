@@ -40,7 +40,6 @@ body {
   grid-area: text;
   background-color: lightgray;
   border-radius: 10px;
-  text-align: center;
 }
 
 .content-home-last-citys {
@@ -82,7 +81,7 @@ body {
 
 .content-weather {
   display: grid;
-  grid-template-columns: 2fr 1.5fr;
+  grid-template-columns: 2fr 2fr;
   grid-template-areas:
     "searchbar searchbar"
     "hour-text hour-text"
@@ -97,7 +96,8 @@ body {
     "weather-diagram-temp weather-diagram-temp"
     "weather-diagram-precipitation weather-diagram-precipitation"
     "weather-sunrise weather-sunset"
-    "weather-wind-speed weather-wind-speed-icon";
+    "weather-wind-speed weather-wind-speed-icon"
+    "uv-index uv-index-icon";
   gap: 10px;
 }
 
@@ -155,13 +155,18 @@ body {
 }
 
 .weather-wind-speed{
-  display: grid;
+  display: flex;
   background-color: lightgray;
   border-radius: 10px;
   justify-content: center;
   align-items: center;
   grid-area: weather-wind-speed;
   padding: 15px;
+}
+
+.weather-wind-speed img{
+  height: 150px;
+  width: 150px;
 }
 
 .weather-wind-speed-text{
@@ -178,6 +183,33 @@ body {
   align-items: center;
   background-color: lightgray;
   border-radius: 10px;
+  height: 60vh;
+}
+
+.uv-index{
+  grid-area: uv-index;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: lightgray;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.uv-index img{
+  height: 150px;
+  width: 150px;
+}
+
+.uv-index-icon{
+  grid-area: uv-index-icon;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  background-color: lightgray;
+  border-radius: 10px;
+  padding: 15px;
+  height: 60vh;
 }
 
 @media (max-width: 600px) {
@@ -200,7 +232,9 @@ body {
     "weather-sunrise"
     "weather-sunset"
     "weather-wind-speed"
-    "weather-wind-speed-icon";
+    "weather-wind-speed-icon"
+    "uv-index"
+    "uv-index-icon";
   gap: 10px;
 }
 

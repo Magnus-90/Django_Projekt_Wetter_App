@@ -62,6 +62,7 @@ def get_weather_data(latitude, longitude):
 	)
 	daily_daylight_duration = daily.Variables(5).ValuesAsNumpy()
 	daily_sunshine_duration = daily.Variables(6).ValuesAsNumpy()
+	daily_uv_index_max = daily.Variables(7).ValuesAsNumpy()
 
 	daily_data = {"date": pd.date_range(
 		start = pd.to_datetime(daily.Time() + response.UtcOffsetSeconds(), unit = "s", utc = True),
@@ -77,6 +78,7 @@ def get_weather_data(latitude, longitude):
 	daily_data["sunset"] = daily_sunset
 	daily_data["daylight_duration"] = daily_daylight_duration
 	daily_data["sunshine_duration"] = daily_sunshine_duration
+	daily_data["uv_index_max"] = daily_uv_index_max
 
 	daily_dataframe = pd.DataFrame(data = daily_data)
 	print("\Daily data\n", daily_dataframe)
