@@ -97,8 +97,108 @@ body {
     "weather-diagram-precipitation weather-diagram-precipitation"
     "weather-sunrise weather-sunset"
     "weather-wind-speed weather-wind-speed-icon"
-    "uv-index uv-index-icon";
+    "uv-index uv-index-icon"
+    "pollen-alder-text pollen-alder-diagram"
+    "pollen-brich-text pollen-birch-diagram"
+    "pollen-grass-text pollen-grass-diagram"
+    "pollen-mugwort-text pollen-mugwort-diagram"
+    "pollen-ragweed-text pollen-ragweed-diagram";
   gap: 10px;
+}
+
+.weather-pollen-text-alder {
+  grid-area: pollen-alder-text;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: lightgray;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.weather-pollen-text-brich {
+  grid-area: pollen-brich-text;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: lightgray;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.weather-pollen-text-grass {
+  grid-area: pollen-grass-text;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: lightgray;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.weather-pollen-text-mugwort {
+  grid-area: pollen-mugwort-text;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: lightgray;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.weather-pollen-text-ragweed {
+  grid-area: pollen-ragweed-text;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: lightgray;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.weather-diagram-pollen-alder {
+  grid-area: pollen-alder-diagram;
+  background-color: lightgray;
+  border-radius: 10px;
+  position: relative;
+}
+
+.weather-diagram-pollen-birch {
+  grid-area: pollen-birch-diagram;
+  background-color: lightgray;
+  border-radius: 10px;
+  position: relative;
+}
+
+.weather-diagram-pollen-grass {
+  grid-area: pollen-grass-diagram;
+  background-color: lightgray;
+  border-radius: 10px;
+  position: relative;
+}
+
+.weather-diagram-pollen-mugwort {
+  grid-area: pollen-mugwort-diagram;
+  background-color: lightgray;
+  border-radius: 10px;
+  position: relative;
+}
+
+.weather-diagram-pollen-ragweed {
+  grid-area: pollen-ragweed-diagram;
+  background-color: lightgray;
+  border-radius: 10px;
+  position: relative;
+}
+
+.weather-pollen-text-alder img,
+.weather-pollen-text-brich img, 
+.weather-pollen-text-grass img, 
+.weather-pollen-text-mugwort img,
+.weather-pollen-text-ragweed img {
+  height: 300px;
+  width: 300px;
+  padding: 15px;
 }
 
 .weather-sunrise{
@@ -135,14 +235,7 @@ body {
   grid-area: weather-diagram-temp;
   background-color: lightgray;
   border-radius: 10px;
-  padding: 15px;
-  height: 450px;
-  position: relative;
-}
-
-.weather-diagram canvas{
-  height: 450px;
-  width: 100%;
+  position: relative; 
 }
 
 .weather-diagram-precipitation{
@@ -152,6 +245,32 @@ body {
   padding: 15px;
   height: 450px;
   position: relative;
+}
+
+.weather-diagram-temp,
+.weather-diagram-precipitation,
+.weather-diagram-pollen-alder,
+.weather-diagram-pollen-brich,
+.weather-diagram-pollen-grass,
+.weather-diagram-pollen-mugwort,
+.weather-diagram-pollen-ragweed {
+  overflow-x: auto;
+  height: 300px;
+  padding: 30px;
+}
+
+.diagram-inner {
+  min-width: 400px;
+  height: 100%;
+  position: relative;
+}
+
+.weather-temp-diagram,
+.weather-precipitation-diagram,
+.weather-pollen-diagram {
+  width: 100% !important;
+  height: 100% !important;
+  min-width: unset;
 }
 
 .weather-wind-speed{
@@ -212,7 +331,7 @@ body {
   height: 60vh;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 870px) {
   .content-weather {
   display: grid;
   grid-template-columns: 1fr;
@@ -224,6 +343,8 @@ body {
     "temperature"
     "pressure"
     "condition"
+    "weather-diagram-temp"
+    "weather-diagram-precipitation"
     "daily-text"
     "weather-icon-daily"
     "daily-min"
@@ -234,16 +355,18 @@ body {
     "weather-wind-speed"
     "weather-wind-speed-icon"
     "uv-index"
-    "uv-index-icon";
+    "uv-index-icon"
+    "pollen-alder-text" 
+    "pollen-alder-diagram"
+    "pollen-brich-text" 
+    "pollen-birch-diagram"
+    "pollen-grass-text" 
+    "pollen-grass-diagram"
+    "pollen-mugwort-text" 
+    "pollen-mugwort-diagram"
+    "pollen-ragweed-text" 
+    "pollen-ragweed-diagram";
   gap: 10px;
-}
-
-.weather-diagram-temp{
-  display: none;
-}
-
-.weather-diagram-precipitation{
-  display: none;
 }
 }
 

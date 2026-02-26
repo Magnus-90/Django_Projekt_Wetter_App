@@ -32,5 +32,5 @@ def get_uv_index(latitude, longitude):
 	daily_data["uv_index_max"] = daily_uv_index_max
 
 	daily_dataframe = pd.DataFrame(data = daily_data)
-	print("\Daily data\n", daily_dataframe)
+	# print("\Daily data\n", daily_dataframe)
 	return float(daily_uv_index_max[0])

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .apimeteo import get_weather_data
 from .uv_index_skript import get_uv_index
+from .pollen_skript import get_pollen_data
 from datetime import datetime
 from .models import City, LastCities, FavoriteCities
 from django.utils import timezone
@@ -121,6 +122,56 @@ def weather(request):
                 return "thunderstorms"
             case _ :
                 return "not-available"
+            
+    def get_current_alder(pollen_load):
+        if pollen_load <= 10:
+            return "Schwach"
+        elif pollen_load <= 69:
+            return "Mässig"
+        elif pollen_load <= 249:
+            return "Stark"
+        else:
+            return "Sehr Stark"
+
+    def get_current_birch(pollen_load):
+        if pollen_load <= 10:
+            return "Schwach"
+        elif pollen_load <= 69:
+            return "Mässig"
+        elif pollen_load <= 299:
+            return "Stark"
+        else:
+            return "Sehr Stark"
+        
+    def get_current_grass(pollen_load):
+        if pollen_load <= 19:
+            return "Schwach"
+        elif pollen_load <= 29:
+            return "Mässig"
+        elif pollen_load <= 149:
+            return "Stark"
+        else:
+            return "Sehr Stark"
+
+    def get_current_mugwort(pollen_load):
+        if pollen_load <= 5:
+            return "Schwach"
+        elif pollen_load <= 14:
+            return "Mässig"
+        elif pollen_load <= 49:
+            return "Stark"
+        else:
+            return "Sehr Stark"
+
+    def get_current_ragweed(pollen_load):
+        if pollen_load <= 5:
+            return "Schwach"
+        elif pollen_load <= 10:
+            return "Mässig"
+        elif pollen_load <= 39:
+            return "Stark"
+        else:
+            return "Sehr Stark"
 
 
     city_name = request.GET.get("city","")
@@ -144,11 +195,18 @@ def weather(request):
         
         weather_data = get_weather_data(latitude, longitude)
         uv_index = get_uv_index(latitude, longitude)
+        pollen_data = get_pollen_data(latitude, longitude)
     else:
         return render(request, "weather.html", {"city_name": ""})
 
     timezone_pytz = pytz.timezone('Europe/Berlin')
     current_hour = datetime.now(timezone_pytz).hour
+    pollen_hourly = pollen_data["hourly"]
+    alder_pollen = pollen_hourly["alder_pollen"].tolist()
+    birch_pollen = pollen_hourly["birch_pollen"].tolist()
+    grass_pollen = pollen_hourly["grass_pollen"].tolist()
+    mugwort_pollen = pollen_hourly["mugwort_pollen"].tolist()
+    ragweed_pollen = pollen_hourly["ragweed_pollen"].tolist()
     current_temperature_hour = weather_data["hourly"]["temperature_2m"][current_hour]
     current_pressure_hour = weather_data["hourly"]["surface_pressure"][current_hour]
     current_condition_hour = weather_data["hourly"]["weather_code"][current_hour]
@@ -188,7 +246,17 @@ def weather(request):
         "sunset": daily_sunset,
         "beaufort": beaufort,
         "uv_index": uv_index,
-        "uv_category": get_uv_category(uv_index)
+        "uv_category": get_uv_category(uv_index),
+        "pollen_alder": alder_pollen,
+        "pollen_birch": birch_pollen,
+        "pollen_grass": grass_pollen,
+        "pollen_mugwort": mugwort_pollen,
+        "pollen_ragweed": ragweed_pollen,
+        "current_pollen_alder": get_current_alder(alder_pollen[current_hour]),
+        "current_pollen_birch": get_current_birch(birch_pollen[current_hour]),
+        "current_pollen_grass": get_current_grass(grass_pollen[current_hour]),
+        "current_pollen_mugwort": get_current_mugwort(mugwort_pollen[current_hour]),
+        "current_pollen_ragweed": get_current_ragweed(ragweed_pollen[current_hour])
     }
     return render(request, "weather.html", data)
 

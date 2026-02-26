@@ -43,7 +43,7 @@ def get_weather_data(latitude, longitude):
 	hourly_data["wind_speed_10m"] = hourly_wind_speed_10m
 
 	hourly_dataframe = pd.DataFrame(data = hourly_data)
-	print("\nHourly data\n", hourly_dataframe)
+	# print("\nHourly data\n", hourly_dataframe)
 
 	daily = response.Daily()
 	daily_weather_code = daily.Variables(0).ValuesAsNumpy()
@@ -81,7 +81,7 @@ def get_weather_data(latitude, longitude):
 	daily_data["uv_index_max"] = daily_uv_index_max
 
 	daily_dataframe = pd.DataFrame(data = daily_data)
-	print("\Daily data\n", daily_dataframe)
+	# print("\Daily data\n", daily_dataframe)
 	return {
         'coordinates': {
             'latitude': response.Latitude(),

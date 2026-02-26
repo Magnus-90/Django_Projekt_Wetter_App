@@ -61,11 +61,13 @@
         {% if hourly_temps %}
         <div class="weather-diagram-temp">
             <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0"></script>
-            <canvas class="weather-temp-diagram" id="myChart"></canvas>
+            <div class="diagram-inner">
+              <canvas class="weather-temp-diagram" id="myChart-temp"></canvas>
+            </div>
             <script>
                 const xValuestemperture = ["0 Uhr","1 Uhr","2 Uhr","3 Uhr","4 Uhr","5 Uhr","6 Uhr","7 Uhr","8 Uhr","9 Uhr","10 Uhr","11 Uhr","12 Uhr","13 Uhr","14 Uhr","15 Uhr","16 Uhr","17 Uhr","18 Uhr","19 Uhr","20 Uhr","21 Uhr","22 Uhr","23 Uhr"];
                 const yValuestemperature = {{ hourly_temps }};
-                const ctxtemperature = document.getElementById('myChart');
+                const ctxtemperature = document.getElementById('myChart-temp');
 
                 new Chart(ctxtemperature, {
                   type: "line",
@@ -88,6 +90,17 @@
                         display: true,
                         text: "Temperatur Verlauf",
                         font: {size:16}
+                      },
+                      scales: {
+                        y: {
+                          min: 0
+                        },
+                        x: {
+                          ticks: {
+                            maxRotation: 0,
+                            minRotation: 0
+                          }
+                        }
                       }
                     }
                   }
@@ -95,7 +108,9 @@
             </script>
         </div>
         <div class="weather-diagram-precipitation">
-            <canvas class="weather-precipitation-diagram" id="myChart-precipitation"></canvas>
+            <div class="diagram-inner">
+              <canvas class="weather-precipitation-diagram" id="myChart-precipitation"></canvas>
+            </div>
             <script>
                 const xValuesprecipitation = ["0 Uhr","1 Uhr","2 Uhr","3 Uhr","4 Uhr","5 Uhr","6 Uhr","7 Uhr","8 Uhr","9 Uhr","10 Uhr","11 Uhr","12 Uhr","13 Uhr","14 Uhr","15 Uhr","16 Uhr","17 Uhr","18 Uhr","19 Uhr","20 Uhr","21 Uhr","22 Uhr","23 Uhr"];
                 const yValuesprecipitation = {{ hourly_precipitation }};
@@ -122,6 +137,251 @@
                         display: true,
                         text: "Niederschlag",
                         font: {size:16}
+                      }
+                    }
+                  }
+                });
+            </script>
+        </div>
+        <div class="weather-pollen-text-alder">Erlen Pollen Belastung: {{ current_pollen_alder }} <br> <img src="{% static 'wetterapp/css/icons/pollen-tree.svg' %}" alt=""> </div>
+        <div class="weather-diagram-pollen-alder">
+            <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0"></script>
+            <div class="diagram-inner">
+              <canvas class="weather-pollen-diagram" id="myChart-alder"></canvas>
+            </div>
+            <script>
+                const xValuespollen_alder = ["0 Uhr","1 Uhr","2 Uhr","3 Uhr","4 Uhr","5 Uhr","6 Uhr","7 Uhr","8 Uhr","9 Uhr","10 Uhr","11 Uhr","12 Uhr","13 Uhr","14 Uhr","15 Uhr","16 Uhr","17 Uhr","18 Uhr","19 Uhr","20 Uhr","21 Uhr","22 Uhr","23 Uhr"];
+                const yValuespollen_alder = {{ pollen_alder }};
+                const ctxpollen_alder = document.getElementById('myChart-alder');
+
+                new Chart(ctxpollen_alder, {
+                  type: "line",
+                  data: {
+                    labels: xValuespollen_alder,
+                    datasets: [{
+                      fill: false,
+                      lineTension: 0.1,
+                      backgroundColor: "rgba(0,0,255,1.0)",
+                      borderColor: "rgba(0,0,255,0.1)",
+                      data: yValuespollen_alder
+                    }]
+                  },
+                  options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                      legend: {display:false},
+                      title: {
+                        display: true,
+                        text: "Erlen Pollen Verlauf",
+                        font: {size:16}
+                      },
+                      scales: {
+                        y: {
+                          min: 0
+                        },
+                        x: {
+                          ticks: {
+                            maxRotation: 0,
+                            minRotation: 0
+                          }
+                        }
+                      }
+                    }
+                  }
+                });
+            </script>
+        </div>
+        <div class="weather-pollen-text-brich">Birken Pollen Belastung: {{ current_pollen_birch }} <br> <img src="{% static 'wetterapp/css/icons/pollen-tree.svg' %}" alt=""></div>
+        <div class="weather-diagram-pollen-birch">
+            <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0"></script>
+            <div class="diagram-inner">
+              <canvas class="weather-pollen-diagram" id="myChart-birch"></canvas>
+            </div>
+            <script>
+                const xValuespollen_birch = ["0 Uhr","1 Uhr","2 Uhr","3 Uhr","4 Uhr","5 Uhr","6 Uhr","7 Uhr","8 Uhr","9 Uhr","10 Uhr","11 Uhr","12 Uhr","13 Uhr","14 Uhr","15 Uhr","16 Uhr","17 Uhr","18 Uhr","19 Uhr","20 Uhr","21 Uhr","22 Uhr","23 Uhr"];
+                const yValuespollen_birch = {{ pollen_birch }};
+                const ctxpollen_brich = document.getElementById('myChart-birch');
+
+                new Chart(ctxpollen_brich, {
+                  type: "line",
+                  data: {
+                    labels: xValuespollen_birch,
+                    datasets: [{
+                      fill: false,
+                      lineTension: 0.1,
+                      backgroundColor: "rgba(0,0,255,1.0)",
+                      borderColor: "rgba(0,0,255,0.1)",
+                      data: yValuespollen_birch
+                    }]
+                  },
+                  options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                      legend: {display:false},
+                      title: {
+                        display: true,
+                        text: "Briken Pollen Verlauf",
+                        font: {size:16}
+                      },
+                      scales: {
+                        y: {
+                          min: 0
+                        },
+                        x: {
+                          ticks: {
+                            maxRotation: 0,
+                            minRotation: 0
+                          }
+                        }
+                      }
+                    }
+                  }
+                });
+            </script>
+        </div>
+        <div class="weather-pollen-text-grass">Gräser Pollen Belastung: {{ current_pollen_grass }} <br> <img src="{% static 'wetterapp/css/icons/pollen-grass.svg' %}" alt=""></div>
+        <div class="weather-diagram-pollen-grass">
+            <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0"></script>
+            <div class="diagram-inner">
+              <canvas class="weather-pollen-diagram" id="myChart-grass"></canvas>
+            </div>
+            <script>
+                const xValuespollen_grass = ["0 Uhr","1 Uhr","2 Uhr","3 Uhr","4 Uhr","5 Uhr","6 Uhr","7 Uhr","8 Uhr","9 Uhr","10 Uhr","11 Uhr","12 Uhr","13 Uhr","14 Uhr","15 Uhr","16 Uhr","17 Uhr","18 Uhr","19 Uhr","20 Uhr","21 Uhr","22 Uhr","23 Uhr"];
+                const yValuespollen_grass = {{ pollen_grass }};
+                const ctxpollen_grass = document.getElementById('myChart-grass');
+
+                new Chart(ctxpollen_grass, {
+                  type: "line",
+                  data: {
+                    labels: xValuespollen_grass,
+                    datasets: [{
+                      fill: false,
+                      lineTension: 0.1,
+                      backgroundColor: "rgba(0,0,255,1.0)",
+                      borderColor: "rgba(0,0,255,0.1)",
+                      data: yValuespollen_grass
+                    }]
+                  },
+                  options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                      legend: {display:false},
+                      title: {
+                        display: true,
+                        text: "Gräser Pollen Verlauf",
+                        font: {size:16}
+                      },
+                      scales: {
+                        y: {
+                          min: 0
+                        },
+                        x: {
+                          ticks: {
+                            maxRotation: 0,
+                            minRotation: 0
+                          }
+                        }
+                      }
+                    }
+                  }
+                });
+            </script>
+        </div>
+        <div class="weather-pollen-text-mugwort">Beifuss Pollen Belastung: {{ current_pollen_mugwort }} <br> <img src="{% static 'wetterapp/css/icons/pollen-grass.svg' %}" alt=""></div>
+        <div class="weather-diagram-pollen-mugwort">
+            <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0"></script>
+            <div class="diagram-inner">
+              <canvas class="weather-pollen-diagram" id="myChart-mugwort"></canvas>
+            </div>
+            <script>
+                const xValuespollen_mugwort = ["0 Uhr","1 Uhr","2 Uhr","3 Uhr","4 Uhr","5 Uhr","6 Uhr","7 Uhr","8 Uhr","9 Uhr","10 Uhr","11 Uhr","12 Uhr","13 Uhr","14 Uhr","15 Uhr","16 Uhr","17 Uhr","18 Uhr","19 Uhr","20 Uhr","21 Uhr","22 Uhr","23 Uhr"];
+                const yValuespollen_mugwort = {{ pollen_mugwort }};
+                const ctxpollen_mugwort = document.getElementById('myChart-mugwort');
+
+                new Chart(ctxpollen_mugwort, {
+                  type: "line",
+                  data: {
+                    labels: xValuespollen_mugwort,
+                    datasets: [{
+                      fill: false,
+                      lineTension: 0.1,
+                      backgroundColor: "rgba(0,0,255,1.0)",
+                      borderColor: "rgba(0,0,255,0.1)",
+                      data: yValuespollen_mugwort
+                    }]
+                  },
+                  options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                      legend: {display:false},
+                      title: {
+                        display: true,
+                        text: "Beifuss Pollen Verlauf",
+                        font: {size:16}
+                      },
+                      scales: {
+                        y: {
+                          min: 0
+                        },
+                        x: {
+                          ticks: {
+                            maxRotation: 0,
+                            minRotation: 0
+                          }
+                        }
+                      }
+                    }
+                  }
+                });
+            </script>
+        </div>
+        <div class="weather-pollen-text-ragweed">Ambrosia Pollen Belastung: {{ current_pollen_ragweed }} <br> <img src="{% static 'wetterapp/css/icons/pollen-flower.svg' %}" alt=""></div>
+        <div class="weather-diagram-pollen-ragweed">
+            <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0"></script>
+            <div class="diagram-inner">
+              <canvas class="weather-pollen-diagram" id="myChart-ragweed"></canvas>
+            </div>
+            <script>
+                const xValuespollen_ragweed = ["0 Uhr","1 Uhr","2 Uhr","3 Uhr","4 Uhr","5 Uhr","6 Uhr","7 Uhr","8 Uhr","9 Uhr","10 Uhr","11 Uhr","12 Uhr","13 Uhr","14 Uhr","15 Uhr","16 Uhr","17 Uhr","18 Uhr","19 Uhr","20 Uhr","21 Uhr","22 Uhr","23 Uhr"];
+                const yValuespollen_ragweed = {{ pollen_ragweed }};
+                const ctxpollen_ragweed = document.getElementById('myChart-ragweed');
+
+                new Chart(ctxpollen_ragweed, {
+                  type: "line",
+                  data: {
+                    labels: xValuespollen_ragweed,
+                    datasets: [{
+                      fill: false,
+                      lineTension: 0.1,
+                      backgroundColor: "rgba(0,0,255,1.0)",
+                      borderColor: "rgba(0,0,255,0.1)",
+                      data: yValuespollen_ragweed
+                    }]
+                  },
+                  options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                      legend: {display:false},
+                      title: {
+                        display: true,
+                        text: "Ambrosia Pollen Verlauf",
+                        font: {size:16}
+                      },
+                      scales: {
+                        y: {
+                          min: 0
+                        },
+                        x: {
+                          ticks: {
+                            maxRotation: 0,
+                            minRotation: 0
+                          }
+                        }
                       }
                     }
                   }
