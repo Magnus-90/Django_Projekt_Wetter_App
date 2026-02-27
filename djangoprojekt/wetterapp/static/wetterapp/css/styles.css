@@ -107,109 +107,78 @@ body {
   gap: 10px;
 }
 
-.sunshine-duration{
-  grid-area: sunshine-duration;
+.sunshine-duration,
+.daylight-duration,
+.weather-pollen-text-alder,
+.weather-pollen-text-brich,
+.weather-pollen-text-grass,
+.weather-pollen-text-mugwort,
+.weather-pollen-text-ragweed{
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: lightgray;
   border-radius: 10px;
   padding: 15px;
+}
+
+.sunshine-duration{
+  grid-area: sunshine-duration;
 }
 
 .daylight-duration{
   grid-area: daylight-duration;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: lightgray;
-  border-radius: 10px;
-  padding: 15px;
 }
 
 .weather-pollen-text-alder {
   grid-area: pollen-alder-text;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: lightgray;
-  border-radius: 10px;
-  padding: 15px;
 }
 
 .weather-pollen-text-brich {
   grid-area: pollen-brich-text;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: lightgray;
-  border-radius: 10px;
-  padding: 15px;
 }
 
 .weather-pollen-text-grass {
   grid-area: pollen-grass-text;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: lightgray;
-  border-radius: 10px;
-  padding: 15px;
 }
 
 .weather-pollen-text-mugwort {
   grid-area: pollen-mugwort-text;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: lightgray;
-  border-radius: 10px;
-  padding: 15px;
 }
 
 .weather-pollen-text-ragweed {
   grid-area: pollen-ragweed-text;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+}
+
+.weather-diagram-pollen-alder,
+.weather-diagram-pollen-birch,
+.weather-diagram-pollen-grass,
+.weather-diagram-pollen-mugwort,
+.weather-diagram-pollen-ragweed{
   background-color: lightgray;
   border-radius: 10px;
+  position: relative;
   padding: 15px;
 }
 
 .weather-diagram-pollen-alder {
   grid-area: pollen-alder-diagram;
-  background-color: lightgray;
-  border-radius: 10px;
-  position: relative;
 }
 
 .weather-diagram-pollen-birch {
   grid-area: pollen-birch-diagram;
-  background-color: lightgray;
-  border-radius: 10px;
-  position: relative;
 }
 
 .weather-diagram-pollen-grass {
   grid-area: pollen-grass-diagram;
-  background-color: lightgray;
-  border-radius: 10px;
-  position: relative;
 }
 
 .weather-diagram-pollen-mugwort {
   grid-area: pollen-mugwort-diagram;
-  background-color: lightgray;
-  border-radius: 10px;
-  position: relative;
 }
 
 .weather-diagram-pollen-ragweed {
   grid-area: pollen-ragweed-diagram;
-  background-color: lightgray;
-  border-radius: 10px;
-  position: relative;
 }
 
 .daylight-duration img {
@@ -225,52 +194,45 @@ body {
 .sunshine-duration img{
   height: 150px;
   width: 150px;
-  padding: 15px;
 }
 
 .weather-sunrise{
+  grid-area: weather-sunrise;
+}
+
+.weather-sunset{
+  grid-area: weather-sunset;
+}
+
+.weather-sunrise,
+.weather-sunset{
   display: flex;
   justify-content: center;
   align-items: center;
-  grid-area: weather-sunrise;
   background-color: lightgray;
   border-radius: 10px;
   padding: 15px;
 }
 
-.weather-sunrise img{
-  height: 150px;
-  width: 150px;
-}
-
+.weather-sunrise img,
 .weather-sunset img{
   height: 150px;
   width: 150px;
 }
 
-.weather-sunset{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  grid-area: weather-sunset;
-  background-color: lightgray;
-  border-radius: 10px;
-  padding: 15px;
-}
-
 .weather-diagram-temp{
   grid-area: weather-diagram-temp;
-  background-color: lightgray;
-  border-radius: 10px;
-  position: relative; 
 }
 
 .weather-diagram-precipitation{
   grid-area: weather-diagram-precipitation;
+}
+
+.weather-temp-diagram,
+.weather-diagram-precipitation{
   background-color: lightgray;
   border-radius: 10px;
   padding: 15px;
-  height: 450px;
   position: relative;
 }
 
@@ -283,7 +245,7 @@ body {
 .weather-diagram-pollen-ragweed {
   overflow-x: auto;
   height: 300px;
-  padding: 30px;
+  padding: 15px;
 }
 
 .diagram-inner {
