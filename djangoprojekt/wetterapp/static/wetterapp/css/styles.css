@@ -81,7 +81,7 @@ body {
 
 .content-weather {
   display: grid;
-  grid-template-columns: 2fr 2fr;
+  grid-template-columns: 1fr 1fr;
   grid-template-areas:
     "searchbar searchbar"
     "hour-text hour-text"
@@ -102,8 +102,29 @@ body {
     "pollen-brich-text pollen-birch-diagram"
     "pollen-grass-text pollen-grass-diagram"
     "pollen-mugwort-text pollen-mugwort-diagram"
-    "pollen-ragweed-text pollen-ragweed-diagram";
+    "pollen-ragweed-text pollen-ragweed-diagram"
+    "sunshine-duration daylight-duration";
   gap: 10px;
+}
+
+.sunshine-duration{
+  grid-area: sunshine-duration;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: lightgray;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.daylight-duration{
+  grid-area: daylight-duration;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: lightgray;
+  border-radius: 10px;
+  padding: 15px;
 }
 
 .weather-pollen-text-alder {
@@ -191,13 +212,19 @@ body {
   position: relative;
 }
 
+.daylight-duration img {
+  height: 200px;
+  width: 200px;
+}
+
 .weather-pollen-text-alder img,
 .weather-pollen-text-brich img, 
 .weather-pollen-text-grass img, 
 .weather-pollen-text-mugwort img,
-.weather-pollen-text-ragweed img {
-  height: 300px;
-  width: 300px;
+.weather-pollen-text-ragweed img,
+.sunshine-duration img{
+  height: 150px;
+  width: 150px;
   padding: 15px;
 }
 
@@ -365,7 +392,9 @@ body {
     "pollen-mugwort-text" 
     "pollen-mugwort-diagram"
     "pollen-ragweed-text" 
-    "pollen-ragweed-diagram";
+    "pollen-ragweed-diagram"
+    "sunshine-duration"
+    "daylight-duration";
   gap: 10px;
 }
 }

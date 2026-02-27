@@ -172,6 +172,11 @@ def weather(request):
             return "Stark"
         else:
             return "Sehr Stark"
+        
+    def seconds_to_hours(seconds):
+        hours = int(seconds) // 3600
+        minutes = (int(seconds) % 3600) // 60
+        return f"{hours:02d}:{minutes:02d}"
 
 
     city_name = request.GET.get("city","")
@@ -220,6 +225,8 @@ def weather(request):
     hourly_wind = weather_data["hourly"]["wind_speed_10m"][current_hour]
     daily_sunrise = weather_data["daily"]["sunrise"][0]
     daily_sunset = weather_data["daily"]["sunset"][0]
+    sunshine_duration = weather_data["daily"]["sunshine_duration"][0]
+    daylight_duaration = weather_data["daily"]["daylight_duration"][0]
     beaufort = get_beaufort(hourly_wind)
 
     data ={
@@ -244,6 +251,8 @@ def weather(request):
         "hourly_wind": hourly_wind,
         "sunrise": daily_sunrise,
         "sunset": daily_sunset,
+        "sunshine_duration": seconds_to_hours(sunshine_duration),
+        "daylight_duration": seconds_to_hours(daylight_duaration),
         "beaufort": beaufort,
         "uv_index": uv_index,
         "uv_category": get_uv_category(uv_index),

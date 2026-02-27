@@ -173,7 +173,7 @@
                       legend: {display:false},
                       title: {
                         display: true,
-                        text: "Erlen Pollen Verlauf",
+                        text: "Erlen Pollen Verlauf pro m³",
                         font: {size:16}
                       },
                       scales: {
@@ -222,7 +222,7 @@
                       legend: {display:false},
                       title: {
                         display: true,
-                        text: "Briken Pollen Verlauf",
+                        text: "Briken Pollen Verlauf pro m³",
                         font: {size:16}
                       },
                       scales: {
@@ -271,7 +271,7 @@
                       legend: {display:false},
                       title: {
                         display: true,
-                        text: "Gräser Pollen Verlauf",
+                        text: "Gräser Pollen Verlauf pro m³",
                         font: {size:16}
                       },
                       scales: {
@@ -320,7 +320,7 @@
                       legend: {display:false},
                       title: {
                         display: true,
-                        text: "Beifuss Pollen Verlauf",
+                        text: "Beifuss Pollen Verlauf pro m³",
                         font: {size:16}
                       },
                       scales: {
@@ -369,7 +369,7 @@
                       legend: {display:false},
                       title: {
                         display: true,
-                        text: "Ambrosia Pollen Verlauf",
+                        text: "Ambrosia Pollen Verlauf pro m³",
                         font: {size:16}
                       },
                       scales: {
@@ -397,5 +397,7 @@
             <img src="{% static 'wetterapp/css/icons/not-available.svg' %}" alt="" draggable="false">
           {% endif %}
         </div>
+        <div class="sunshine-duration">Sonnenscheindauer: {{ sunshine_duration }} Stunden <br> <img src="{% static 'wetterapp/css/icons/sun-hot.svg' %}?v=2" alt="" draggable="false"></div>
+        <div class="daylight-duration">Tageslichtdauer: {{ daylight_duration }} Stunden <br> <img src="{% static 'wetterapp/css/icons/daylight-duration.svg' %}?v=2" alt="" draggable="false"></div>
     </div>
 {% endblock %}
