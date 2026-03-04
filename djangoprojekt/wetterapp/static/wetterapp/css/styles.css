@@ -1,12 +1,19 @@
 * {
   font-family: "Open Sans", sans-serif;
 }
+
+:root {
+  --color-bg: lightgray;
+  --radius: 10px;
+  --padding: 15px;
+}
+
 body {
   margin: 0;
   padding: 0;
 }
 .header {
-  background-color: lightgray;
+  background-color: var(--color-bg);
   padding: 20px;
 }
 .header h1 {
@@ -18,6 +25,9 @@ body {
   margin: 10px;
 }
 
+
+/* Home Seite */
+
 .content-home {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -25,46 +35,6 @@ body {
     "text text"
     "last favorite";
   gap: 10px;
-}
-
-.content-home-text {
-  grid-area: text;
-  background-color: lightgray;
-  border-radius: 10px;
-  text-align: center;
-}
-
-.content-home-text img {
-  width: 200px;
-  height: 200px;
-  grid-area: text;
-  background-color: lightgray;
-  border-radius: 10px;
-}
-
-.content-home-last-citys {
-  grid-area: last;
-  background-color: lightgray;
-  border-radius: 10px;
-  text-align: center;
-}
-
-.content-home-favorite-citys {
-  text-align: center;
-  grid-area: favorite;
-  background-color: lightgray;
-  border-radius: 10px;
-  text-align: center;
-}
-
-.nav-buttons {
-  text-decoration: none;
-  color: black;
-  margin: 10px;
-}
-
-.nav-buttons:hover {
-  text-decoration: underline;
 }
 
 @media (max-width: 600px) {
@@ -78,6 +48,45 @@ body {
     gap: 10px;
   }
 }
+
+.content-home-text {
+  grid-area: text;
+}
+
+.content-home-text img {
+  width: 200px;
+  height: 200px;
+}
+
+.content-home-last-citys {
+  background-color: var(--color-bg);
+}
+
+.content-home-favorite-citys {
+  grid-area: favorite;
+}
+
+.content-home-text,
+.content-home-favorite-citys,
+.content-home-last-citys {
+  background-color: var(--color-bg);
+  border-radius: var(--radius);
+  text-align: center;
+}
+
+/* Base Template */
+
+.nav-buttons {
+  text-decoration: none;
+  color: black;
+  margin: 10px;
+}
+
+.nav-buttons:hover {
+  text-decoration: underline;
+}
+
+/* Weather Seite */
 
 .content-weather {
   display: grid;
@@ -117,9 +126,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: lightgray;
-  border-radius: 10px;
-  padding: 15px;
+  background-color: var(--color-bg);
+  border-radius: var(--radius);
+  padding: var(--padding);
 }
 
 .sunshine-duration{
@@ -149,18 +158,6 @@ body {
 .weather-pollen-text-ragweed {
   grid-area: pollen-ragweed-text;
 }
-
-.weather-diagram-pollen-alder,
-.weather-diagram-pollen-birch,
-.weather-diagram-pollen-grass,
-.weather-diagram-pollen-mugwort,
-.weather-diagram-pollen-ragweed{
-  background-color: lightgray;
-  border-radius: 10px;
-  position: relative;
-  padding: 15px;
-}
-
 .weather-diagram-pollen-alder {
   grid-area: pollen-alder-diagram;
 }
@@ -181,11 +178,6 @@ body {
   grid-area: pollen-ragweed-diagram;
 }
 
-.daylight-duration img {
-  height: 200px;
-  width: 200px;
-}
-
 .weather-pollen-text-alder img,
 .weather-pollen-text-brich img, 
 .weather-pollen-text-grass img, 
@@ -194,6 +186,26 @@ body {
 .sunshine-duration img{
   height: 150px;
   width: 150px;
+}
+
+.weather-diagram-temp,
+.weather-diagram-precipitation,
+.weather-diagram-pollen-alder,
+.weather-diagram-pollen-birch,
+.weather-diagram-pollen-grass,
+.weather-diagram-pollen-mugwort,
+.weather-diagram-pollen-ragweed {
+  overflow-x: auto;
+  height: 300px;
+  background-color: var(--color-bg);
+  border-radius: var(--radius);
+  position: relative;
+  padding: var(--padding);
+}
+
+.daylight-duration img {
+  height: 200px;
+  width: 200px;
 }
 
 .weather-sunrise{
@@ -209,9 +221,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: lightgray;
-  border-radius: 10px;
-  padding: 15px;
+  background-color: var(--color-bg);
+  border-radius: var(--radius);
+  padding: var(--padding);
 }
 
 .weather-sunrise img,
@@ -228,24 +240,12 @@ body {
   grid-area: weather-diagram-precipitation;
 }
 
-.weather-temp-diagram,
-.weather-diagram-precipitation{
-  background-color: lightgray;
-  border-radius: 10px;
-  padding: 15px;
-  position: relative;
-}
-
 .weather-diagram-temp,
-.weather-diagram-precipitation,
-.weather-diagram-pollen-alder,
-.weather-diagram-pollen-brich,
-.weather-diagram-pollen-grass,
-.weather-diagram-pollen-mugwort,
-.weather-diagram-pollen-ragweed {
-  overflow-x: auto;
-  height: 300px;
-  padding: 15px;
+.weather-diagram-precipitation{
+  background-color: var(--color-bg);
+  border-radius: var(--radius);
+  padding: var(--padding);
+  position: relative;
 }
 
 .diagram-inner {
@@ -263,13 +263,7 @@ body {
 }
 
 .weather-wind-speed{
-  display: flex;
-  background-color: lightgray;
-  border-radius: 10px;
-  justify-content: center;
-  align-items: center;
   grid-area: weather-wind-speed;
-  padding: 15px;
 }
 
 .weather-wind-speed img{
@@ -285,39 +279,33 @@ body {
 }
 
 .weather-wind-speed-icon{
-  display: flex;
   grid-area: weather-wind-speed-icon;
-  justify-content: center;
-  align-items: center;
-  background-color: lightgray;
-  border-radius: 10px;
   height: 60vh;
 }
 
 .uv-index{
   grid-area: uv-index;
+}
+
+.uv-index-icon{
+  grid-area: uv-index-icon;
+}
+
+.uv-index,
+.weather-wind-speed,
+.weather-wind-speed-icon,
+.uv-index-icon {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: lightgray;
-  border-radius: 10px;
-  padding: 15px;
+  background-color: var(--color-bg);
+  border-radius: var(--radius);
+  padding: var(--padding);
 }
 
 .uv-index img{
   height: 150px;
   width: 150px;
-}
-
-.uv-index-icon{
-  grid-area: uv-index-icon;
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  background-color: lightgray;
-  border-radius: 10px;
-  padding: 15px;
-  height: 60vh;
 }
 
 @media (max-width: 870px) {
@@ -363,26 +351,26 @@ body {
 
 .weather-hour-text {
   grid-area: hour-text;
-  background-color: lightgray;
-  border-radius: 10px;
 }
 
 .weather-daily-text {
   grid-area: daily-text;
-  background-color: lightgray;
-  border-radius: 10px;
 }
 
 .weather-daily-min-temp {
   grid-area: daily-min;
-  background-color: lightgray;
-  border-radius: 10px;
 }
 
 .weather-daily-max-temp {
   grid-area: daily-max;
-  background-color: lightgray;
-  border-radius: 10px;
+}
+
+.weather-hour-text,
+.weather-daily-text,
+.weather-daily-max-temp,
+.weather-daily-min-temp {
+  background-color: var(--color-bg);
+  border-radius: var(--radius);
 }
 
 .weather-icon-hour,
@@ -399,24 +387,24 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 15px;
+  padding: var(--padding);
 }
 
 .searchbar {
-  background-color: lightgray;
+  background-color: var(--color-bg);
   grid-area: searchbar;
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 10px;
-  border-radius: 10px;
+  padding: var(--padding);
+  border-radius: var(--radius);
 }
 
 .searchbar input {
   flex: 1;
-  background-color: lightgray;
+  background-color: var(--color-bg);
   border: none;
-  border-radius: 10px;
+  border-radius: var(--radius);
   padding: 12px 20px;
   font-size: 16px;
   outline: none;
@@ -430,7 +418,7 @@ body {
   width: 45px;
   height: 45px;
   border-radius: 50px;
-  background-color: lightgray;
+  background-color: var(--color-bg);
   border: none;
   cursor: pointer;
   display: flex;
@@ -450,27 +438,49 @@ body {
 }
 
 .weather-icon-daily {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   grid-area: weather-icon-daily;
-  background-color: lightgray;
-  border-radius: 10px;
 }
 
 .weather-icon-hour {
+  grid-area: weather-icon-hour;
+}
+
+.weather-icon-hour,
+.weather-icon-daily {
   display: flex;
   justify-content: center;
   align-items: center;
-  grid-area: weather-icon-hour;
-  background-color: lightgray;
-  border-radius: 10px;
+  background-color: var(--color-bg);
+  border-radius: var(--radius);
 }
 
 .weather-place {
   grid-area: place;
-  background-color: lightgray;
-  border-radius: 10px;
+}
+
+.weather-temperature {
+  grid-area: temperature;
+}
+
+.weather-pressure {
+  grid-area: pressure;
+}
+
+.weather-condition {
+  grid-area: condition;
+}
+
+.weather-condition-daily {
+  grid-area: daily-condition;
+}
+
+.weather-place,
+.weather-temperature,
+.weather-pressure,
+.weather-condition,
+.weather-condition-daily {
+  background-color: var(--color-bg);
+  border-radius: var(--radius);
 }
 
 .weather-place img{
@@ -478,39 +488,18 @@ body {
   height: 150px;
 }
 
-.weather-temperature {
-  grid-area: temperature;
-  background-color: lightgray;
-  border-radius: 10px;
-}
-
 .weather-temperature img {
   width: 150px;
   height: 150px;
 }
 
-.weather-pressure {
-  grid-area: pressure;
-  background-color: lightgray;
-  border-radius: 10px;
-}
 
 .weather-pressure img {
   width: 100px;
   height: 100px;
 }
 
-.weather-condition {
-  grid-area: condition;
-  background-color: lightgray;
-  border-radius: 10px;
-}
-
-.weather-condition-daily {
-  grid-area: daily-condition;
-  background-color: lightgray;
-  border-radius: 10px;
-}
+/* Cities Seite */
 
 .content-citys {
   display: grid;
@@ -524,9 +513,9 @@ body {
   grid-template-columns: 2fr 2fr 0.5fr;
   grid-template-areas: 
   "city-name cordinates favorite-button";
-  background-color: lightgray;
-  border-radius: 10px;
-  padding: 15px;
+  background-color: var(--color-bg);
+  border-radius: var(--radius);
+  padding: var(--padding);
   text-align: center;
 }
 
@@ -541,18 +530,18 @@ body {
 }
 
 .favorite-button button {
-  border-radius: 10px;
+  border-radius: var(--radius);
   background-color: rgb(185, 185, 185);
   border: none;
 }
 
 .favorite-button button:hover {
-  border-radius: 10px;
+  border-radius: var(--radius);
   background-color: rgb(231, 229, 229);
 }
 
 .favorite-button button:active {
-  border-radius: 10px;
+  border-radius: var(--radius);
   background-color: rgb(185, 185, 185);
 }
 
@@ -564,12 +553,14 @@ body {
     "city-name" 
     "cordinates" 
     "favorite-button";
-    background-color: lightgray;
-    border-radius: 10px;
-    padding: 15px;
+    background-color: var(--color-bg);
+    border-radius: var(--radius);
+    padding: var(--padding);
     text-align: center;
 }
 }
+
+/* User Page */
 
 .content-userpage {
   display: grid;
@@ -584,10 +575,10 @@ body {
 
 .logout-button {
   grid-area: button;
-  background-color: lightgray;
+  background-color: var(--color-bg);
   height: 80px;
   border: none;
-  border-radius: 10px;
+  border-radius: var(--radius);
 }
 
 .logout-button:hover {
@@ -601,8 +592,4 @@ body {
 
 .username {
   text-decoration: none;
-}
-
-.main{
-  padding: 20px;
 }
