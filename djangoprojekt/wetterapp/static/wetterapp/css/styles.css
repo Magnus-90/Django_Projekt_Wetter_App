@@ -3,7 +3,7 @@
 }
 
 :root {
-  --color-bg: lightgray;
+  --color-bg: rgb(163, 195, 217);
   --radius: 10px;
   --padding: 15px;
 }
@@ -90,30 +90,301 @@ body {
 
 .content-weather {
   display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "searchbar"
+    "temp-card"
+    "precipitation-card"
+    "wind-card"
+    "uv-card"
+    "sun-card"
+    "pollen-card";
+  gap: 10px;
+}
+
+/* Temparatur Card */
+
+.temp-card {
+  grid-area: temp-card;
+  display: grid;
+  grid-template-columns:  1fr 1fr 1fr 1.5fr;
+  grid-template-areas:
+    "temp-card-text temp-card-text temp-card-text weather-icon-hour"
+    "weather-place weather-temperature temp-card-icon-compass weather-icon-hour"
+    "weather-daily-max-temp weather-daily-max-temp weather-daily-max-temp weather-icon-hour"
+    "weather-daily-min-temp weather-daily-min-temp weather-daily-min-temp weather-icon-hour"
+    "weather-diagram-temp weather-diagram-temp weather-diagram-temp weather-icon-hour";
+}
+
+.temp-card-text {
+  grid-area: temp-card-text;
+}
+
+.weather-place {
+  grid-area: weather-place;
+}
+
+.temp-card-icon-compass {
+  grid-area: temp-card-icon-compass;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.temp-card-icon-compass img {
+  height: 150px;
+  width: 150px;
+}
+
+.temp-card-icon-weather {
+  grid-area: weather-icon-hour;
+  display: flex;
+  align-items: center;
+}
+
+.weather-temperature {
+  grid-area: weather-temperature;
+}
+
+.weather-daily-min-temp {
+  grid-area: weather-daily-min-temp;
+}
+
+.weather-daily-max-temp {
+  grid-area: weather-daily-max-temp;
+}
+
+.weather-diagram-temp{
+  grid-area: weather-diagram-temp;
+}
+
+@media (max-width: 870px) {
+  .content-weather {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "searchbar"
+    "temp-card"
+    "precipitation-card"
+    "wind-card"
+    "uv-card"
+    "sun-card"
+    "pollen-card";
+  gap: 10px;
+}
+.temp-card {
+  grid-area: temp-card;
+  display: grid;
+  grid-template-columns:  1fr 1fr;
+  grid-template-areas:
+    "temp-card-text temp-card-text"
+    "weather-icon-hour weather-icon-hour"
+    "weather-place weather-place"
+    "temp-card-icon-compass temp-card-icon-compass" 
+    "weather-temperature weather-temperature" 
+    "weather-daily-max-temp weather-daily-max-temp"
+    "weather-daily-min-temp weather-daily-min-temp"
+    "weather-diagram-temp weather-diagram-temp";
+}
+}
+
+
+/* Niederschlag Card */
+
+.precipitation-card {
+  grid-area: precipitation-card;
+  display: grid;
+  grid-template-columns: 1fr 0.5fr;
+  grid-template-areas:
+    "precipitation-card-text precipitation-card-icon-weather"
+    "weather-diagram-precipitation precipitation-card-icon-weather";
+}
+
+.precipitation-card-text {
+  grid-area: precipitation-card-text;
+}
+
+.precipitation-card-icon-weather {
+  grid-area: precipitation-card-icon-weather;
+}
+
+.weather-diagram-precipitation{
+  grid-area: weather-diagram-precipitation;
+}
+
+/* Wind Card */
+
+.wind-card {
+  grid-area: wind-card;
+  display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-areas:
-    "searchbar searchbar"
-    "hour-text hour-text"
-    "place weather-icon-hour"
-    "temperature weather-icon-hour"
-    "pressure weather-icon-hour"
-    "condition weather-icon-hour"
-    "daily-text daily-text"
-    "daily-min weather-icon-daily"
-    "daily-max weather-icon-daily"
-    "daily-condition weather-icon-daily"
-    "weather-diagram-temp weather-diagram-temp"
-    "weather-diagram-precipitation weather-diagram-precipitation"
+    "wind-card-text wind-card-text"
+    "weather-wind-speed wind-card-icon-weather";
+}
+
+.wind-card-text {
+  height: 100px;
+  grid-area: wind-card-text;
+}
+
+.wind-card-icon-weather{
+  grid-area: wind-card-icon-weather;
+}
+
+.weather-wind-speed{
+  grid-area: weather-wind-speed;
+}
+
+.weather-wind-speed img{
+  height: 200px;
+  width: 200px;
+}
+
+/* UV Card */
+
+.uv-card {
+  grid-area: uv-card;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "uv-card-text uv-card-text"
+    "uv-index uv-index-icon";
+}
+
+.uv-card-text {
+  grid-area: uv-card-text;
+}
+
+.uv-index{
+  grid-area: uv-index;
+}
+
+.uv-index img{
+  height: 150px;
+  width: 150px;
+}
+
+.uv-index-icon{
+  grid-area: uv-index-icon;
+}
+
+/* Sonnen Card */
+
+.sun-card {
+  grid-area: sun-card;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "sun-card-text sun-card-text"  
     "weather-sunrise weather-sunset"
-    "weather-wind-speed weather-wind-speed-icon"
-    "uv-index uv-index-icon"
-    "pollen-alder-text pollen-alder-diagram"
-    "pollen-brich-text pollen-birch-diagram"
-    "pollen-grass-text pollen-grass-diagram"
-    "pollen-mugwort-text pollen-mugwort-diagram"
-    "pollen-ragweed-text pollen-ragweed-diagram"
     "sunshine-duration daylight-duration";
-  gap: 10px;
+}
+
+.sun-card-text {
+  grid-area: sun-card-text;
+}
+
+.daylight-duration img {
+  height: 200px;
+  width: 200px;
+}
+
+.weather-sunrise{
+  grid-area: weather-sunrise;
+}
+
+.weather-sunset{
+  grid-area: weather-sunset;
+}
+
+.sunshine-duration{
+  grid-area: sunshine-duration;
+}
+
+.daylight-duration{
+  grid-area: daylight-duration;
+}
+
+.weather-sunrise,
+.weather-sunset{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-bg);
+  border-radius: var(--radius);
+  padding: var(--padding);
+}
+
+.weather-sunrise img,
+.weather-sunset img{
+  height: 150px;
+  width: 150px;
+}
+
+/* Pollen Card */
+
+.pollen-card {
+  grid-area: pollen-card;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "pollen-card-text pollen-card-text"
+    "weather-pollen-text-alder weather-diagram-pollen-alder"
+    "weather-pollen-text-brich weather-diagram-pollen-birch"
+    "weather-pollen-text-grass weather-diagram-pollen-grass"
+    "weather-pollen-text-mugwort weather-diagram-pollen-mugwort"
+    "weather-pollen-text-ragweed weather-diagram-pollen-ragweed";
+}
+
+.weather-pollen-text-alder {
+  grid-area: weather-pollen-text-alder;
+}
+
+.weather-pollen-text-brich {
+  grid-area: weather-pollen-text-brich;
+}
+
+.weather-pollen-text-grass {
+  grid-area: weather-pollen-text-grass;
+}
+
+.weather-pollen-text-mugwort {
+  grid-area: weather-pollen-text-mugwort;
+}
+
+.weather-pollen-text-ragweed {
+  grid-area: weather-pollen-text-ragweed;
+}
+.weather-diagram-pollen-alder {
+  grid-area: weather-diagram-pollen-alder;
+}
+
+.weather-diagram-pollen-birch {
+  grid-area: weather-diagram-pollen-birch;
+}
+
+.weather-diagram-pollen-grass {
+  grid-area: weather-diagram-pollen-grass;
+}
+
+.weather-diagram-pollen-mugwort {
+  grid-area: weather-diagram-pollen-mugwort;
+}
+
+.weather-diagram-pollen-ragweed {
+  grid-area: weather-diagram-pollen-ragweed;
+}
+
+.temp-card,
+.precipitation-card,
+.wind-card,
+.uv-card,
+.sun-card,
+.pollen-card {
+  background-color: var(--color-bg);
+  border-radius: var(--radius);
+  padding: var(--padding);
 }
 
 .sunshine-duration,
@@ -129,53 +400,6 @@ body {
   background-color: var(--color-bg);
   border-radius: var(--radius);
   padding: var(--padding);
-}
-
-.sunshine-duration{
-  grid-area: sunshine-duration;
-}
-
-.daylight-duration{
-  grid-area: daylight-duration;
-}
-
-.weather-pollen-text-alder {
-  grid-area: pollen-alder-text;
-}
-
-.weather-pollen-text-brich {
-  grid-area: pollen-brich-text;
-}
-
-.weather-pollen-text-grass {
-  grid-area: pollen-grass-text;
-}
-
-.weather-pollen-text-mugwort {
-  grid-area: pollen-mugwort-text;
-}
-
-.weather-pollen-text-ragweed {
-  grid-area: pollen-ragweed-text;
-}
-.weather-diagram-pollen-alder {
-  grid-area: pollen-alder-diagram;
-}
-
-.weather-diagram-pollen-birch {
-  grid-area: pollen-birch-diagram;
-}
-
-.weather-diagram-pollen-grass {
-  grid-area: pollen-grass-diagram;
-}
-
-.weather-diagram-pollen-mugwort {
-  grid-area: pollen-mugwort-diagram;
-}
-
-.weather-diagram-pollen-ragweed {
-  grid-area: pollen-ragweed-diagram;
 }
 
 .weather-pollen-text-alder img,
@@ -203,43 +427,6 @@ body {
   padding: var(--padding);
 }
 
-.daylight-duration img {
-  height: 200px;
-  width: 200px;
-}
-
-.weather-sunrise{
-  grid-area: weather-sunrise;
-}
-
-.weather-sunset{
-  grid-area: weather-sunset;
-}
-
-.weather-sunrise,
-.weather-sunset{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--color-bg);
-  border-radius: var(--radius);
-  padding: var(--padding);
-}
-
-.weather-sunrise img,
-.weather-sunset img{
-  height: 150px;
-  width: 150px;
-}
-
-.weather-diagram-temp{
-  grid-area: weather-diagram-temp;
-}
-
-.weather-diagram-precipitation{
-  grid-area: weather-diagram-precipitation;
-}
-
 .weather-diagram-temp,
 .weather-diagram-precipitation{
   background-color: var(--color-bg);
@@ -262,15 +449,6 @@ body {
   min-width: unset;
 }
 
-.weather-wind-speed{
-  grid-area: weather-wind-speed;
-}
-
-.weather-wind-speed img{
-  height: 150px;
-  width: 150px;
-}
-
 .weather-wind-speed-text{
   display: flex;
   grid-area: text;
@@ -281,14 +459,6 @@ body {
 .weather-wind-speed-icon{
   grid-area: weather-wind-speed-icon;
   height: 60vh;
-}
-
-.uv-index{
-  grid-area: uv-index;
-}
-
-.uv-index-icon{
-  grid-area: uv-index-icon;
 }
 
 .uv-index,
@@ -303,51 +473,6 @@ body {
   padding: var(--padding);
 }
 
-.uv-index img{
-  height: 150px;
-  width: 150px;
-}
-
-@media (max-width: 870px) {
-  .content-weather {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-areas:
-    "searchbar"
-    "hour-text"
-    "weather-icon-hour"
-    "place"
-    "temperature"
-    "pressure"
-    "condition"
-    "weather-diagram-temp"
-    "weather-diagram-precipitation"
-    "daily-text"
-    "weather-icon-daily"
-    "daily-min"
-    "daily-max"
-    "daily-condition"
-    "weather-sunrise"
-    "weather-sunset"
-    "weather-wind-speed"
-    "weather-wind-speed-icon"
-    "uv-index"
-    "uv-index-icon"
-    "pollen-alder-text" 
-    "pollen-alder-diagram"
-    "pollen-brich-text" 
-    "pollen-birch-diagram"
-    "pollen-grass-text" 
-    "pollen-grass-diagram"
-    "pollen-mugwort-text" 
-    "pollen-mugwort-diagram"
-    "pollen-ragweed-text" 
-    "pollen-ragweed-diagram"
-    "sunshine-duration"
-    "daylight-duration";
-  gap: 10px;
-}
-}
 
 .weather-hour-text {
   grid-area: hour-text;
@@ -355,14 +480,6 @@ body {
 
 .weather-daily-text {
   grid-area: daily-text;
-}
-
-.weather-daily-min-temp {
-  grid-area: daily-min;
-}
-
-.weather-daily-max-temp {
-  grid-area: daily-max;
 }
 
 .weather-hour-text,
@@ -441,10 +558,6 @@ body {
   grid-area: weather-icon-daily;
 }
 
-.weather-icon-hour {
-  grid-area: weather-icon-hour;
-}
-
 .weather-icon-hour,
 .weather-icon-daily {
   display: flex;
@@ -452,14 +565,6 @@ body {
   align-items: center;
   background-color: var(--color-bg);
   border-radius: var(--radius);
-}
-
-.weather-place {
-  grid-area: place;
-}
-
-.weather-temperature {
-  grid-area: temperature;
 }
 
 .weather-pressure {
