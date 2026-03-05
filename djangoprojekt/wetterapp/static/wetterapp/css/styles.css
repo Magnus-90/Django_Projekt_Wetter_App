@@ -17,7 +17,7 @@ body {
 .header {
   background-color: var(--color-bg);
   padding: 20px;
-  width: 100%;
+  width: auto;
 }
 .header h1 {
   margin-top: 0;
@@ -27,7 +27,6 @@ body {
 .main {
   margin: 10px;
 }
-
 
 /* Home Seite */
 
@@ -172,16 +171,16 @@ body {
 .temp-card {
   grid-area: temp-card;
   display: grid;
-  grid-template-columns:  1fr 1fr;
+  grid-template-columns: 1fr;
   grid-template-areas:
-    "temp-card-text temp-card-text"
-    "weather-icon-hour weather-icon-hour"
-    "weather-place weather-place"
-    "temp-card-icon-compass temp-card-icon-compass" 
-    "weather-temperature weather-temperature" 
-    "weather-daily-max-temp weather-daily-max-temp"
-    "weather-daily-min-temp weather-daily-min-temp"
-    "weather-diagram-temp weather-diagram-temp";
+    "temp-card-text"
+    "weather-icon-hour"
+    "weather-place"
+    "temp-card-icon-compass" 
+    "weather-temperature" 
+    "weather-daily-max-temp"
+    "weather-daily-min-temp"
+    "weather-diagram-temp";
 }
 }
 

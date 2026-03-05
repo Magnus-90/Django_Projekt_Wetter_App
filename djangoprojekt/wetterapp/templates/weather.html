@@ -99,23 +99,29 @@
             </div>
             {% endif %}
           <div class="weather-pollen-text-grass">Gräser Pollen Belastung: {{ current_pollen_grass }} <br> <img src="{% static 'wetterapp/css/icons/pollen-grass.svg' %}" alt=""></div>
-            <div class="weather-diagram-pollen-grass">
+            {% if current_pollen_grass %}
+          <div class="weather-diagram-pollen-grass">
                 <div class="diagram-inner">
                   <canvas class="weather-pollen-diagram js-weather-chart" id="myChart-grass" data-chart-title="Gräser Pollen Verlauf pro m³" data-series='{{ pollen_grass|safe }}' data-min-y="0"></canvas>
                 </div>
             </div>
+            {% endif %}
           <div class="weather-pollen-text-mugwort">Beifuss Pollen Belastung: {{ current_pollen_mugwort }} <br> <img src="{% static 'wetterapp/css/icons/pollen-grass.svg' %}" alt=""></div>
+            {% if current_pollen_mugwort %}
             <div class="weather-diagram-pollen-mugwort">
                 <div class="diagram-inner">
                   <canvas class="weather-pollen-diagram js-weather-chart" id="myChart-mugwort" data-chart-title="Beifuss Pollen Verlauf pro m³" data-series='{{ pollen_mugwort|safe }}' data-min-y="0"></canvas>
                 </div>
             </div>
+            {% endif %}
           <div class="weather-pollen-text-ragweed">Ambrosia Pollen Belastung: {{ current_pollen_ragweed }} <br> <img src="{% static 'wetterapp/css/icons/pollen-flower.svg' %}" alt=""></div>
+            {% if current_pollen_ragweed %}
             <div class="weather-diagram-pollen-ragweed">
                 <div class="diagram-inner">
                   <canvas class="weather-pollen-diagram js-weather-chart" id="myChart-ragweed" data-chart-title="Ambrosia Pollen Verlauf pro m³" data-series='{{ pollen_ragweed|safe }}' data-min-y="0"></canvas>
                 </div>
             </div>
+            {% endif %}
           </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0"></script>
