@@ -157,6 +157,7 @@
         <div class="pollen-card">
           <div class="pollen-card-text"><h2>Pollen Belastung</h2></div>
           <div class="weather-pollen-text-alder">Erlen Pollen Belastung: {{ current_pollen_alder }} <br> <img src="{% static 'wetterapp/css/icons/pollen-tree.svg' %}" alt=""> </div>
+          {% if current_pollen_alder %}
             <div class="weather-diagram-pollen-alder">
                 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0"></script>
                 <div class="diagram-inner">
@@ -205,7 +206,9 @@
                     });
                 </script>
             </div>
+            {% endif %}
           <div class="weather-pollen-text-brich">Birken Pollen Belastung: {{ current_pollen_birch }} <br> <img src="{% static 'wetterapp/css/icons/pollen-tree.svg' %}" alt=""></div>
+            {% if current_pollen_birch %}
             <div class="weather-diagram-pollen-birch">
                 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0"></script>
                 <div class="diagram-inner">
@@ -254,8 +257,10 @@
                     });
                 </script>
             </div>
+            {% endif %}
           <div class="weather-pollen-text-grass">Gräser Pollen Belastung: {{ current_pollen_grass }} <br> <img src="{% static 'wetterapp/css/icons/pollen-grass.svg' %}" alt=""></div>
-            <div class="weather-diagram-pollen-grass">
+            
+          <div class="weather-diagram-pollen-grass">
                 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0"></script>
                 <div class="diagram-inner">
                   <canvas class="weather-pollen-diagram" id="myChart-grass"></canvas>
