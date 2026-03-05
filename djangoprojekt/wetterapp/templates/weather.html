@@ -39,9 +39,11 @@
         <div class="precipitation-card">
           <div class="precipitation-card-text"><h2>Niederschlag</h2></div>
           <div class="weather-diagram-precipitation">
+            {% if hourly_precipitation %}
             <div class="diagram-inner">
               <canvas class="weather-precipitation-diagram js-weather-chart" id="myChart-precipitation" data-chart-title="Niederschlag" data-series='{{ hourly_precipitation|safe }}'></canvas>
             </div>
+            {% endif %}
         </div>
         <div class="precipitation-card-icon-weather" draggable="false">
             <img src="{% static 'wetterapp/css/icons/'%}{{ condition_icon_hourly|default:'not-available' }}.svg?v=2" alt="{{ condition_icon_hourly }}" draggable="false">
@@ -141,6 +143,7 @@
         const options = {
           responsive: true,
           maintainAspectRatio: false,
+          resizeDelay: 0,
           plugins: {
             legend: { display: false },
             title: {
@@ -169,7 +172,7 @@
       document.querySelectorAll('.js-weather-chart').forEach((canvasElement) => {
         const title = canvasElement.dataset.chartTitle || '';
         const series = parseSeries(canvasElement.dataset.series || '[]');
-        const minY = canvasElement.dataset.minY ? Number(canvasElement.dataset.minY) : null;
+        const minY = canvasElement.dataset.minY ? Number(canvasElement.dataset.minY) : 0;
 
         new Chart(canvasElement, {
           type: 'line',

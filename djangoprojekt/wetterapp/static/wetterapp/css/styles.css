@@ -9,10 +9,11 @@
   --padding: 15px;
 }
 
-body {
+html, body {
   margin: 0;
   padding: 0;
   min-width: 100%;
+  /* overflow-x: hidden; */
 }
 .header {
   background-color: var(--color-bg);
@@ -23,6 +24,19 @@ body {
   margin-top: 0;
   margin-left: 10px;
 }
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* .temp-card > *,
+.precipitation-card > *,
+.wind-card > *,
+.uv-card > *,
+.sun-card > *,
+.pollen-card > * {
+  min-width: 0;
+} */
 
 .main {
   margin: 10px;
@@ -276,6 +290,10 @@ body {
     "wind-card-icon-weather"
     "weather-wind-speed";
 }
+.weather-wind-speed img{
+  height: 150px;
+  width: 150px;
+}
 }
 /* UV Card */
 
@@ -377,6 +395,20 @@ body {
 .weather-sunset img{
   height: 150px;
   width: 150px;
+}
+
+@media (max-width: 870px) {
+  .sun-card {
+  grid-area: sun-card;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "sun-card-text"  
+    "weather-sunrise"
+    "weather-sunset"
+    "sunshine-duration" 
+    "daylight-duration";
+}
 }
 
 /* Pollen Card */
@@ -513,7 +545,7 @@ body {
 }
 
 .diagram-inner {
-  /* min-width: 400px; */
+  min-width: 100px;
   height: 100%;
   width: 100%;
   position: relative;
@@ -536,7 +568,7 @@ body {
 
 .weather-wind-speed-icon{
   grid-area: weather-wind-speed-icon;
-  height: 60vh;
+  /* height: 60vh; */
 }
 
 .uv-index,
