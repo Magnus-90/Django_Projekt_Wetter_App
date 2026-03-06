@@ -1,3 +1,5 @@
+/* Ganze Seite */
+
 * {
   box-sizing: border-box;
   font-family: "Open Sans", sans-serif;
@@ -13,7 +15,6 @@ html, body {
   margin: 0;
   padding: 0;
   min-width: 100%;
-  /* overflow-x: hidden; */
 }
 .header {
   background-color: var(--color-bg);
@@ -29,14 +30,11 @@ img {
   height: auto;
 }
 
-/* .temp-card > *,
-.precipitation-card > *,
-.wind-card > *,
-.uv-card > *,
-.sun-card > *,
-.pollen-card > * {
-  min-width: 0;
-} */
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .main {
   margin: 10px;
@@ -61,11 +59,11 @@ img {
       "text"
       "last"
       "favorite";
-    gap: 10px;
   }
 }
 
 .content-home-text {
+  padding: var(--padding);
   grid-area: text;
 }
 
@@ -142,9 +140,6 @@ img {
 
 .temp-card-icon-compass {
   grid-area: temp-card-icon-compass;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .temp-card-icon-compass img {
@@ -154,16 +149,13 @@ img {
 
 .temp-card-icon-weather {
   grid-area: weather-icon-hour;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-.temp-card-icon-weather img {
+/* .temp-card-icon-weather img {
   width: 100%;
   max-width: 400px;
   height: auto;
-}
+} */
 
 .weather-temperature {
   grid-area: weather-temperature;
@@ -215,12 +207,10 @@ img {
 
 .precipitation-card-icon-weather {
   grid-area: precipitation-card-icon-weather;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-.precipitation-card-icon-weather img {
+.precipitation-card-icon-weather img,
+.temp-card-icon-weather img {
   width: 100%;
   max-width: 400px;
   height: auto;
@@ -260,9 +250,6 @@ img {
 
 .wind-card-icon-weather{
   grid-area: wind-card-icon-weather;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .wind-card-icon-weather img {
@@ -321,9 +308,6 @@ img {
 
 .uv-index-icon{
   grid-area: uv-index-icon;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .uv-index-icon img {
@@ -383,9 +367,6 @@ img {
 
 .weather-sunrise,
 .weather-sunset{
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background-color: var(--color-bg);
   border-radius: var(--radius);
   padding: var(--padding);
@@ -503,9 +484,6 @@ img {
 .weather-pollen-text-grass,
 .weather-pollen-text-mugwort,
 .weather-pollen-text-ragweed{
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background-color: var(--color-bg);
   border-radius: var(--radius);
   padding: var(--padding);
@@ -536,14 +514,6 @@ img {
   padding: var(--padding);
 }
 
-.weather-diagram-temp,
-.weather-diagram-precipitation{
-  background-color: var(--color-bg);
-  border-radius: var(--radius);
-  padding: var(--padding);
-  position: relative;
-}
-
 .diagram-inner {
   min-width: 100px;
   height: 100%;
@@ -559,69 +529,27 @@ img {
   min-width: unset;
 }
 
-.weather-wind-speed-text{
-  display: flex;
-  grid-area: text;
-  justify-content: center;
-  align-items: center;
-}
-
-.weather-wind-speed-icon{
-  grid-area: weather-wind-speed-icon;
-  /* height: 60vh; */
-}
-
 .uv-index,
 .weather-wind-speed,
-.weather-wind-speed-icon,
 .uv-index-icon {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background-color: var(--color-bg);
   border-radius: var(--radius);
   padding: var(--padding);
 }
 
-
-.weather-hour-text {
-  grid-area: hour-text;
-}
-
-.weather-daily-text {
-  grid-area: daily-text;
-}
-
-.weather-hour-text,
-.weather-daily-text,
-.weather-daily-max-temp,
-.weather-daily-min-temp {
-  background-color: var(--color-bg);
-  border-radius: var(--radius);
-}
-
-.weather-icon-hour,
 .weather-place,
 .weather-temperature,
-.weather-pressure,
-.weather-condition,
-.weather-hour-text,
-.weather-daily-text,
 .weather-daily-min-temp,
-.weather-daily-max-temp,
-.weather-icon-daily,
-.weather-condition-daily {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.weather-daily-max-temp {
   padding: var(--padding);
+  background-color: var(--color-bg);
+  border-radius: var(--radius);
 }
 
 .searchbar {
   background-color: var(--color-bg);
   grid-area: searchbar;
   display: flex;
-  align-items: center;
   gap: 10px;
   padding: var(--padding);
   border-radius: var(--radius);
@@ -648,9 +576,6 @@ img {
   background-color: var(--color-bg);
   border: none;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .searchbar button:hover {
@@ -659,43 +584,8 @@ img {
 
 .searchbar form {
   display: flex;
-  align-items: center;
   gap: 10px;
   width: 100%;
-}
-
-.weather-icon-daily {
-  grid-area: weather-icon-daily;
-}
-
-.weather-icon-hour,
-.weather-icon-daily {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--color-bg);
-  border-radius: var(--radius);
-}
-
-.weather-pressure {
-  grid-area: pressure;
-}
-
-.weather-condition {
-  grid-area: condition;
-}
-
-.weather-condition-daily {
-  grid-area: daily-condition;
-}
-
-.weather-place,
-.weather-temperature,
-.weather-pressure,
-.weather-condition,
-.weather-condition-daily {
-  background-color: var(--color-bg);
-  border-radius: var(--radius);
 }
 
 .weather-place img{
@@ -706,12 +596,6 @@ img {
 .weather-temperature img {
   width: 150px;
   height: 150px;
-}
-
-
-.weather-pressure img {
-  width: 100px;
-  height: 100px;
 }
 
 /* Cities Seite */
@@ -738,25 +622,20 @@ img {
 .city-name,
 .city-cordinates,
 .favorite-button button {
-  display: flex;
-  justify-items: center;
-  align-items: center;
   margin: 10px;
 }
 
 .favorite-button button {
-  border-radius: var(--radius);
   background-color: rgb(185, 185, 185);
   border: none;
+  border-radius: var(--radius);
 }
 
 .favorite-button button:hover {
-  border-radius: var(--radius);
   background-color: rgb(231, 229, 229);
 }
 
 .favorite-button button:active {
-  border-radius: var(--radius);
   background-color: rgb(185, 185, 185);
 }
 
@@ -768,10 +647,6 @@ img {
     "city-name" 
     "cordinates" 
     "favorite-button";
-    background-color: var(--color-bg);
-    border-radius: var(--radius);
-    padding: var(--padding);
-    text-align: center;
 }
 }
 

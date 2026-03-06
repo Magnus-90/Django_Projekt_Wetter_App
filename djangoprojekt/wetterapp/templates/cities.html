@@ -5,31 +5,31 @@
     <div class="searchbar">
         <form action="" method="GET">
             <input type="text" name="city" placeholder="Suchfeld" value="{{ search }}">
-            <button type="submit">Suchen</button>
+            <button class="flex-center type="submit">Suchen</button>
         </form>
         </div>
     <div class="content-citys">
         {% for city in cities %}
             <div class="city-item">
-                <div class="city-name">
+                <div class="city-name flex-center">
                     <a href="{% url 'weather' %}?city={{ city.name }}">{{city.name}}</a>
                 </div>
-                <div class="city-cordinates">
+                <div class="city-cordinates flex-center">
                     {{ city.latitude|floatformat:2 }}°N, {{ city.longitude|floatformat:2 }}°E
                 </div>
                 {% if user.is_authenticated %}
-                <div class="favorite-button">
+                <div class="favorite-button flex-center">
                     <form method="POST" action="{% url 'add_favorite' city.id %}">
                         {% csrf_token %}
-                        <button type="submit">Favorite</button>
+                        <button class="flex-center" type="submit">Favorite</button>
                     </form>
                     <form method="POST" action="{% url 'remove_favorite' city.id %}">
                         {% csrf_token %}
-                        <button type="submit">Favorite Remove</button>
+                        <button class="flex-center" type="submit">Favorite Remove</button>
                     </form>
                 </div>
                 {% else %}
-                <div class="favorite-button">
+                <div class="favorite-button flex-center">
                     <p>
                         Für Favoriten müssen sie angemeldet sein.
                     </p>
