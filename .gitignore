@@ -1,3 +1,5 @@
+# ! folgende Dateien und Ordner gehören grundsätzlich nicht ins Git-Repo
 __pycache__/
 *.pyc
 db.sqlite3
+/staticfiles/
