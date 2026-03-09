@@ -1,15 +1,19 @@
 {% extends "base.html" %}
+<!-- TODO: warum ist das hier Englisch und der rest der Seite Deutsch? -->
 {% block title %} Weather {% endblock %}
 {% block content %}
 {% load static %}
+    <!-- TODO: warum ist das hier Englisch und der rest der Seite Deutsch? -->
     <h1>Weather</h1>
     <div class="content-weather">
         <div class="searchbar flex-center">
             <form class="flex-center" method="get">
+              <!-- TODO: Beschreibung/Placeholder einfügen oder anpassen, damit man weiss wozu das Suchfeld überhaupt da ist (zb. placeholder zu "Ort eingeben" umbenennen) -->
                 <input name="city" type="text" placeholder="Suchfeld">
                 <button class="flex-center" type="submit">Suchen</button>
         </form>
         </div>
+        <!-- TODO: hier würde ich ein Popup einbauen, das ist schöner. der alert könnte den User verwirren... -->
         {% if city_found == False %}
             <script>
                 alert("Ort: {{ city_name }} wurde nicht gefunden. Bitte beachte das man nur Schweizer Orte suchen kann z.B Zürich.")

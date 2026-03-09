@@ -17,6 +17,8 @@ def get_uv_index(latitude, longitude):
 		"timezone": "Europe/Berlin",
 		"forecast_days": 1,
 	}
+	# TODO: die folgenden zwei Zeilen kannst du auch in einer Zeile schreiben:
+	# response = openmeteo.weather_api(url, params=params)[0]
 	responses = openmeteo.weather_api(url, params=params)
 	response = responses[0]
 
@@ -31,6 +33,7 @@ def get_uv_index(latitude, longitude):
 	)}
 	daily_data["uv_index_max"] = daily_uv_index_max
 
+	# ? brauchts diesen Code wirklich?
 	daily_dataframe = pd.DataFrame(data = daily_data)
 	# print("\Daily data\n", daily_dataframe)
 	return float(daily_uv_index_max[0])
