@@ -39,15 +39,6 @@ def get_pollen_data(latitude, longitude):
     	inclusive = "left"
     )}
 
-    # TODO: könnte man folgendermassen vereinfachen:
-    # hourly_data.update({
-    #   "alder_pollen": hourly_alder_pollen,
-    #   "birch_pollen": hourly_birch_pollen,
-    #   "grass_pollen": hourly_grass_pollen,
-    #   "mugwort_pollen": hourly_mugwort_pollen,
-    #   "ragweed_pollen": hourly_ragweed_pollen
-    # })
-
     hourly_data["alder_pollen"] = hourly_alder_pollen
     hourly_data["birch_pollen"] = hourly_birch_pollen
     hourly_data["grass_pollen"] = hourly_grass_pollen

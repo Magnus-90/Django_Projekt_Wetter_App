@@ -1,18 +1,16 @@
 {% extends "base.html" %}
-{% block title %} Cities {% endblock %}
+{% block title %} Städte/Gemeinde {% endblock %}
 {% block content %}
-    <h1>Cities</h1>
-    <div class="searchbar">
+    <h1>Städte/Gemeinde</h1>
+    <div class="searchbar background-center">
         <form action="" method="GET">
-            <input type="text" name="city" placeholder="Suchfeld" value="{{ search }}">
-            <!-- TODO: hier hats einen kleinen Typo/Syntaxfehler -->
-            <button class="flex-center type="submit">Suchen</button>
+            <input type="text" name="city" placeholder="Hier Ort eingeben..." value="{{ search }}">
+            <button class="flex-center" type="submit">Suchen</button>
         </form>
         </div>
     <div class="content-citys">
-        <!-- TODO: die Cities würde ich alphabetisch sortieren -->
-        {% for city in cities %}
-            <div class="city-item">
+        {% for city in cities|dictsort:"name" %}
+            <div class="city-item background-center">
                 <div class="city-name flex-center">
                     <a href="{% url 'weather' %}?city={{ city.name }}">{{city.name}}</a>
                 </div>
@@ -23,20 +21,15 @@
                 <div class="favorite-button flex-center">
                     <form method="POST" action="{% url 'add_favorite' city.id %}">
                         {% csrf_token %}
-                        <button class="flex-center" type="submit">Favorite</button>
+                        <button class="flex-center" type="submit">Favorit hinzufügen</button>
                     </form>
                     <form method="POST" action="{% url 'remove_favorite' city.id %}">
                         {% csrf_token %}
-                        <button class="flex-center" type="submit">Favorite Remove</button>
+                        <button class="flex-center" type="submit">Favorit entfernen</button>
                     </form>
                 </div>
                 {% else %}
-                <!-- TODO: das würde ich hier garnicht anzeigen, solang der User nicht angemeldet ist -->
-                <div class="favorite-button flex-center">
-                    <p>
-                        Für Favoriten müssen sie angemeldet sein.
-                    </p>
-                </div>
+                <div class="favorite-button flex-center"></div>
                 {% endif %}
         </div>
         {% endfor %}

@@ -1,48 +1,52 @@
 {% extends "base.html" %}
-<!-- TODO: warum ist das hier Englisch und der rest der Seite Deutsch? -->
-{% block title %} Weather {% endblock %}
+{% block title %} Wetter {% endblock %}
 {% block content %}
 {% load static %}
-    <!-- TODO: warum ist das hier Englisch und der rest der Seite Deutsch? -->
-    <h1>Weather</h1>
+    <h1>Wetter</h1>
     <div class="content-weather">
-        <div class="searchbar flex-center">
+        <div class="searchbar flex-center background-center">
             <form class="flex-center" method="get">
-              <!-- TODO: Beschreibung/Placeholder einfügen oder anpassen, damit man weiss wozu das Suchfeld überhaupt da ist (zb. placeholder zu "Ort eingeben" umbenennen) -->
-                <input name="city" type="text" placeholder="Suchfeld">
-                <button class="flex-center" type="submit">Suchen</button>
+              <input class="background-center" name="city" type="text" placeholder="Hier Ort eingeben...">
+              <button class="flex-center" type="submit">Suchen</button>
         </form>
         </div>
-        <!-- TODO: hier würde ich ein Popup einbauen, das ist schöner. der alert könnte den User verwirren... -->
         {% if city_found == False %}
-            <script>
-                alert("Ort: {{ city_name }} wurde nicht gefunden. Bitte beachte das man nur Schweizer Orte suchen kann z.B Zürich.")
-            </script>
+        <div class="error-popup" id="error-popup">
+          <span>«{{ city_name }}» wurde nicht gefunden. Nur Schweizer Orte möglich, z.B. Zürich.</span>
+          <button onclick="closePopup()">✕</button>
+        </div>
+        <script>
+          function closePopup() {
+            const popup = document.getElementById('error-popup');
+            setTimeout(() => popup.remove(), 500);
+          }
+          setTimeout(closePopup, 5000);
+        </script>
         {% endif %}
         <!-- Stündliche Übersicht Elemente -->
-        <div class="temp-card">
+        <div class="temp-card background-center">
           <div class="temp-card-text"><h2>Temperatur</h2></div>
-          <div class="weather-place flex-center">Ort: {{ city_name }} <br> {{ coordinates.latitude|floatformat:2 }}°N {{ coordinates.longitude|floatformat:2 }}°E </div>
+          <div class="weather-place flex-center background-center">Ort: {{ city_name }} <br> {{ coordinates.latitude|floatformat:2 }}°N {{ coordinates.longitude|floatformat:2 }}°E </div>
           <div class="temp-card-icon-compass flex-center">
             <img src="{% static 'wetterapp/css/icons/compass.svg' %}?v=2" alt="Compass" draggable="false">
           </div>
-          <div class="weather-temperature flex-center">Temperatur: {{ current_temp|floatformat:1 }}°C </div>
-          <div class="weather-daily-min-temp flex-center">Min Temperatur: {{ daily_min_temp|floatformat:1 }}°C</div>
-          <div class="weather-daily-max-temp flex-center">Max Temperatur: {{ daily_max_temp|floatformat:1 }}°C</div>
+          <div class="weather-temperature flex-center background-center">Temperatur: {{ current_temp|floatformat:1 }}°C </div>
+          <div class="weather-daily-min-temp flex-center background-center">Min Temperatur: {{ daily_min_temp|floatformat:1 }}°C</div>
+          <div class="weather-daily-max-temp flex-center background-center">Max Temperatur: {{ daily_max_temp|floatformat:1 }}°C</div>
           <div class="temp-card-icon-weather flex-center" draggable="false">
             <img src="{% static 'wetterapp/css/icons/'%}{{ condition_icon_hourly|default:'not-available' }}.svg?v=2" alt="{{ condition_icon_hourly }}" draggable="false">
           </div>
           {% if hourly_temps %}
-          <div class="weather-diagram-temp">
+          <div class="weather-diagram-temp background-center">
             <div class="diagram-inner">
               <canvas class="weather-temp-diagram js-weather-chart" id="myChart-temp" data-chart-title="Temperatur Verlauf" data-series='{{ hourly_temps|safe }}' data-min-y="0"></canvas>
             </div>
           </div>
           {% endif %}
         </div>
-        <div class="precipitation-card">
+        <div class="precipitation-card background-center">
           <div class="precipitation-card-text"><h2>Niederschlag</h2></div>
-          <div class="weather-diagram-precipitation">
+          <div class="weather-diagram-precipitation background-center">
             {% if hourly_precipitation %}
             <div class="diagram-inner">
               <canvas class="weather-precipitation-diagram js-weather-chart" id="myChart-precipitation" data-chart-title="Niederschlag" data-series='{{ hourly_precipitation|safe }}'></canvas>
@@ -53,9 +57,9 @@
             <img src="{% static 'wetterapp/css/icons/'%}{{ condition_icon_hourly|default:'not-available' }}.svg?v=2" alt="{{ condition_icon_hourly }}" draggable="false">
         </div>
         </div>
-        <div class="wind-card">
+        <div class="wind-card background-center">
           <div class="wind-card-text"><h2>Windgeschwindigkeit</h2></div>
-          <div class="weather-wind-speed flex-center">Windgeschwindigkeit: {{ hourly_wind|floatformat:2 }} km/h <img src="{% static 'wetterapp/css/icons/windsock.svg' %}?v=2" alt="" draggable="false"></div>
+          <div class="weather-wind-speed flex-center background-center">Windgeschwindigkeit: {{ hourly_wind|floatformat:2 }} km/h <img src="{% static 'wetterapp/css/icons/windsock.svg' %}?v=2" alt="" draggable="false"></div>
             <div class="wind-card-icon-weather flex-center flex-center">
             {% if hourly_wind %}
               <img src="{% static 'wetterapp/css/icons/wind-beaufort-' %}{{ beaufort }}.svg" alt="Beaufort {{ beaufort }} Icon">
@@ -64,10 +68,10 @@
             {% endif %}
                   </div>
         </div>
-        <div class="uv-card">
+        <div class="uv-card background-center">
           <div class="uv-card-text"><h2>UV Belastung</h2></div>
-          <div class="uv-index flex-center">UV Index: {{ uv_index|floatformat:0 }} <br> UV Kategorie: {{ uv_category }} <img src="{% static 'wetterapp/css/icons/uv-index.svg' %}?v=2" alt="" draggable="false"></div>
-                  <div class="uv-index-icon flex-center">
+          <div class="uv-index flex-center background-center">UV Index: {{ uv_index|floatformat:0 }} <br> UV Kategorie: {{ uv_category }} <img src="{% static 'wetterapp/css/icons/uv-index.svg' %}?v=2" alt="" draggable="false"></div>
+                  <div class="uv-index-icon flex-center background-center">
                     {% if uv_index %}
                       <img src="{% static 'wetterapp/css/icons/uv-index-' %}{{ uv_index|floatformat:0 }}.svg" alt="" draggable="false">
                     {% else %}
@@ -75,54 +79,54 @@
                     {% endif %}
                   </div>
         </div>
-        <div class="sun-card">
+        <div class="sun-card background-center">
           <div class="sun-card-text"><h2>Tageslicht</h2></div>
-          <div class="weather-sunrise flex-center">Sonnenaufgang: {{ sunrise|time:"H:i" }}
+          <div class="weather-sunrise flex-center background-center">Sonnenaufgang: {{ sunrise|time:"H:i" }}
             <img src="{% static 'wetterapp/css/icons/sunrise.svg' %}?v=2" alt="Sunrise Icon" draggable="false">
           </div>
-            <div class="weather-sunset flex-center">Sonnenuntergang: {{ sunset|time:"H:i" }}
+            <div class="weather-sunset flex-center background-center">Sonnenuntergang: {{ sunset|time:"H:i" }}
               <img src="{% static 'wetterapp/css/icons/sunset.svg' %}?v=2" alt="Sunset Icon" draggable="false">
             </div>
-            <div class="sunshine-duration flex-center">Sonnenscheindauer: {{ sunshine_duration }} Stunden <br> <img src="{% static 'wetterapp/css/icons/sun-hot.svg' %}?v=2" alt="" draggable="false"></div>
-            <div class="daylight-duration flex-center">Tageslichtdauer: {{ daylight_duration }} Stunden <br> <img src="{% static 'wetterapp/css/icons/daylight-duration.svg' %}?v=2" alt="" draggable="false"></div>
+            <div class="sunshine-duration flex-center background-center">Sonnenscheindauer: {{ sunshine_duration }} Stunden <br> <img src="{% static 'wetterapp/css/icons/sun-hot.svg' %}?v=2" alt="" draggable="false"></div>
+            <div class="daylight-duration flex-center background-center">Tageslichtdauer: {{ daylight_duration }} Stunden <br> <img src="{% static 'wetterapp/css/icons/daylight-duration.svg' %}?v=2" alt="" draggable="false"></div>
         </div>
-        <div class="pollen-card">
+        <div class="pollen-card background-center">
           <div class="pollen-card-text"><h2>Pollen Belastung</h2></div>
-          <div class="weather-pollen-text-alder flex-center">Erlen Pollen Belastung: {{ current_pollen_alder }} <br> <img src="{% static 'wetterapp/css/icons/pollen-tree.svg' %}" alt="" draggable="false"> </div>
+          <div class="weather-pollen-text-alder flex-center background-center">Erlen Pollen Belastung: {{ current_pollen_alder }} <br> <img src="{% static 'wetterapp/css/icons/pollen-tree.svg' %}" alt="" draggable="false"> </div>
           {% if current_pollen_alder %}
-            <div class="weather-diagram-pollen-alder">
+            <div class="weather-diagram-pollen-alder background-center">
                 <div class="diagram-inner">
                   <canvas class="weather-pollen-diagram js-weather-chart" id="myChart-alder" data-chart-title="Erlen Pollen Verlauf pro m³" data-series='{{ pollen_alder|safe }}' data-min-y="0"></canvas>
                 </div>
             </div>
             {% endif %}
-          <div class="weather-pollen-text-brich flex-center">Birken Pollen Belastung: {{ current_pollen_birch }} <br> <img src="{% static 'wetterapp/css/icons/pollen-tree.svg' %}" alt="" draggable="false"></div>
+          <div class="weather-pollen-text-brich flex-center background-center">Birken Pollen Belastung: {{ current_pollen_birch }} <br> <img src="{% static 'wetterapp/css/icons/pollen-tree.svg' %}" alt="" draggable="false"></div>
             {% if current_pollen_birch %}
-            <div class="weather-diagram-pollen-birch">
+            <div class="weather-diagram-pollen-birch background-center">
                 <div class="diagram-inner">
                   <canvas class="weather-pollen-diagram js-weather-chart" id="myChart-birch" data-chart-title="Briken Pollen Verlauf pro m³" data-series='{{ pollen_birch|safe }}' data-min-y="0"></canvas>
                 </div>
             </div>
             {% endif %}
-          <div class="weather-pollen-text-grass flex-center">Gräser Pollen Belastung: {{ current_pollen_grass }} <br> <img src="{% static 'wetterapp/css/icons/pollen-grass.svg' %}" alt="" draggable="false"></div>
+          <div class="weather-pollen-text-grass flex-center background-center">Gräser Pollen Belastung: {{ current_pollen_grass }} <br> <img src="{% static 'wetterapp/css/icons/pollen-grass.svg' %}" alt="" draggable="false"></div>
             {% if current_pollen_grass %}
-          <div class="weather-diagram-pollen-grass">
+          <div class="weather-diagram-pollen-grass background-center">
                 <div class="diagram-inner">
                   <canvas class="weather-pollen-diagram js-weather-chart" id="myChart-grass" data-chart-title="Gräser Pollen Verlauf pro m³" data-series='{{ pollen_grass|safe }}' data-min-y="0"></canvas>
                 </div>
             </div>
             {% endif %}
-          <div class="weather-pollen-text-mugwort flex-center">Beifuss Pollen Belastung: {{ current_pollen_mugwort }} <br> <img src="{% static 'wetterapp/css/icons/pollen-grass.svg' %}" alt="" draggable="false"></div>
+          <div class="weather-pollen-text-mugwort flex-center background-center">Beifuss Pollen Belastung: {{ current_pollen_mugwort }} <br> <img src="{% static 'wetterapp/css/icons/pollen-grass.svg' %}" alt="" draggable="false"></div>
             {% if current_pollen_mugwort %}
-            <div class="weather-diagram-pollen-mugwort">
+            <div class="weather-diagram-pollen-mugwort background-center">
                 <div class="diagram-inner">
                   <canvas class="weather-pollen-diagram js-weather-chart" id="myChart-mugwort" data-chart-title="Beifuss Pollen Verlauf pro m³" data-series='{{ pollen_mugwort|safe }}' data-min-y="0"></canvas>
                 </div>
             </div>
             {% endif %}
-          <div class="weather-pollen-text-ragweed flex-center">Ambrosia Pollen Belastung: {{ current_pollen_ragweed }} <br> <img src="{% static 'wetterapp/css/icons/pollen-flower.svg' %}" alt="" draggable="false"></div>
+          <div class="weather-pollen-text-ragweed flex-center background-center">Ambrosia Pollen Belastung: {{ current_pollen_ragweed }} <br> <img src="{% static 'wetterapp/css/icons/pollen-flower.svg' %}" alt="" draggable="false"></div>
             {% if current_pollen_ragweed %}
-            <div class="weather-diagram-pollen-ragweed">
+            <div class="weather-diagram-pollen-ragweed background-center">
                 <div class="diagram-inner">
                   <canvas class="weather-pollen-diagram js-weather-chart" id="myChart-ragweed" data-chart-title="Ambrosia Pollen Verlauf pro m³" data-series='{{ pollen_ragweed|safe }}' data-min-y="0"></canvas>
                 </div>

@@ -17,10 +17,8 @@ def get_uv_index(latitude, longitude):
 		"timezone": "Europe/Berlin",
 		"forecast_days": 1,
 	}
-	# TODO: die folgenden zwei Zeilen kannst du auch in einer Zeile schreiben:
-	# response = openmeteo.weather_api(url, params=params)[0]
-	responses = openmeteo.weather_api(url, params=params)
-	response = responses[0]
+
+	response = openmeteo.weather_api(url, params=params)[0]
 
 	daily = response.Daily()
 	daily_uv_index_max = daily.Variables(0).ValuesAsNumpy()

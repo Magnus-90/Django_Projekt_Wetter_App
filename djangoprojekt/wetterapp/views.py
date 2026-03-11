@@ -10,24 +10,28 @@ import pytz
 
 def add_favorite(request, city_id):
     if request.method == "POST" and request.user.is_authenticated:
-        # TODO: Fehlerbehandlung, falls Stadt nicht existiert
-        city = City.objects.get(id=city_id)
-        FavoriteCities.objects.get_or_create(
-            user=request.user,
-            city=city,
-            defaults={"username": request.user.username}
-        )
-    return redirect("cities")
+        try:
+            city = City.objects.get(id=city_id)
+            FavoriteCities.objects.get_or_create(
+                user=request.user,
+                city=city,
+                defaults={"username": request.user.username}
+            )
+            return redirect("cities")
+        except:
+            print("Fehler bei add_favorite")
 
 def remove_favorite(request, city_id):
     if request.method == "POST" and request.user.is_authenticated:
-        # TODO: Fehlerbehandlung, falls Stadt nicht existiert
-        city = City.objects.get(id=city_id)
-        FavoriteCities.objects.filter(
-            user=request.user,
-            city=city
-        ).delete()
-    return redirect("cities")
+        try:
+            city = City.objects.get(id=city_id)
+            FavoriteCities.objects.filter(
+                user=request.user,
+                city=city
+            ).delete()
+            return redirect("cities")
+        except:
+            print("Fehler bei remove_favorite")
 
 def home(request):
     if request.user.is_authenticated:
@@ -42,28 +46,25 @@ def weather(request):
 
     def get_condition_text(code):
         code = int(code)
-        # TODO: match-case verwenden
-        if code == 0:
-            return "Klar"
-        elif code == 2:
-            return "Überwiegend Klar"
-        elif code == 3:
-            return "Teilweise Bewölkt"
-        elif code in [45,48]:
-            return "Neblig"
-        elif code in [51,53,55,61,63,65]:
-            return "Regen"
-        elif code in [71,73,75,77]:
-            return "Schnee"
-        elif code in [80,81,82]:
-            return "Regen"
-        elif code in [95,96,99]:
-            return "Gewitter"
-        else:
-            return "Unbekannt"
+        match code:
+            case 0:
+                return "Klar"
+            case 2:
+                return "Überwiegend Klar"
+            case 3:
+                return "Teilweise Bewölkt"
+            case 45 | 48:
+                return "Neblig"
+            case 51 | 53 | 55 | 61 | 63 | 65 | 80 | 81 | 82:
+                return "Regen"
+            case 71 | 73 | 75 | 77:
+                return "Schnee"
+            case 95 | 96 | 99:
+                return "Gewitter"
+            case _ :
+                return "Unbekannt"
         
     def get_beaufort(wind_kmh):
-        # TODO: match-case verwenden
         if wind_kmh < 1:
             return 0
         elif wind_kmh <= 5:
@@ -276,7 +277,7 @@ def weather(request):
 def cities(request):
     search = request.GET.get("city","")
     if search:
-        cities = City.objects.filter(name__icontains=search)
+        cities = City.objects.filter(name__icontains=search).order_by('name')
     else:
         cities = City.objects.all()
     return render(request, "cities.html", {"cities": cities, "search": search})

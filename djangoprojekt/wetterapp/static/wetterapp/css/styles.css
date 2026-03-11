@@ -36,6 +36,12 @@ img {
   align-items: center;
 }
 
+.background-center {
+  background-color: var(--color-bg);
+  border-radius: var(--radius);
+  padding: var(--padding);
+}
+
 .main {
   margin: 10px;
 }
@@ -72,10 +78,6 @@ img {
   height: 200px;
 }
 
-.content-home-last-citys {
-  background-color: var(--color-bg);
-}
-
 .content-home-favorite-citys {
   grid-area: favorite;
 }
@@ -83,8 +85,6 @@ img {
 .content-home-text,
 .content-home-favorite-citys,
 .content-home-last-citys {
-  background-color: var(--color-bg);
-  border-radius: var(--radius);
   text-align: center;
 }
 
@@ -365,13 +365,6 @@ img {
   grid-area: daylight-duration;
 }
 
-.weather-sunrise,
-.weather-sunset{
-  background-color: var(--color-bg);
-  border-radius: var(--radius);
-  padding: var(--padding);
-}
-
 .weather-sunrise img,
 .weather-sunset img{
   height: 150px;
@@ -466,29 +459,6 @@ img {
 }
 }
 
-.temp-card,
-.precipitation-card,
-.wind-card,
-.uv-card,
-.sun-card,
-.pollen-card {
-  background-color: var(--color-bg);
-  border-radius: var(--radius);
-  padding: var(--padding);
-}
-
-.sunshine-duration,
-.daylight-duration,
-.weather-pollen-text-alder,
-.weather-pollen-text-brich,
-.weather-pollen-text-grass,
-.weather-pollen-text-mugwort,
-.weather-pollen-text-ragweed{
-  background-color: var(--color-bg);
-  border-radius: var(--radius);
-  padding: var(--padding);
-}
-
 .weather-pollen-text-alder img,
 .weather-pollen-text-brich img, 
 .weather-pollen-text-grass img, 
@@ -508,10 +478,7 @@ img {
 .weather-diagram-pollen-ragweed {
   overflow-x: auto;
   height: 300px;
-  background-color: var(--color-bg);
-  border-radius: var(--radius);
   position: relative;
-  padding: var(--padding);
 }
 
 .diagram-inner {
@@ -529,30 +496,10 @@ img {
   min-width: unset;
 }
 
-.uv-index,
-.weather-wind-speed,
-.uv-index-icon {
-  background-color: var(--color-bg);
-  border-radius: var(--radius);
-  padding: var(--padding);
-}
-
-.weather-place,
-.weather-temperature,
-.weather-daily-min-temp,
-.weather-daily-max-temp {
-  padding: var(--padding);
-  background-color: var(--color-bg);
-  border-radius: var(--radius);
-}
-
 .searchbar {
-  background-color: var(--color-bg);
   grid-area: searchbar;
   display: flex;
   gap: 10px;
-  padding: var(--padding);
-  border-radius: var(--radius);
 }
 
 .searchbar input {
@@ -598,6 +545,30 @@ img {
   height: 150px;
 }
 
+.error-popup {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background-color: #e4a34d;
+  border: 1px solid black;
+  color: black;
+  border: 1px solid black;
+  padding: var(--padding);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  z-index: 999;
+}
+
+.error-popup button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #b91c1c;
+    font-size: 1rem;
+}
+
 /* Cities Seite */
 
 .content-citys {
@@ -612,9 +583,6 @@ img {
   grid-template-columns: 2fr 2fr 0.5fr;
   grid-template-areas: 
   "city-name cordinates favorite-button";
-  background-color: var(--color-bg);
-  border-radius: var(--radius);
-  padding: var(--padding);
   text-align: center;
 }
 

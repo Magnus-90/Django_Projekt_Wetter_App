@@ -1,6 +1,6 @@
-{% extends "base.html" %} {% block title %} User Page {% endblock %}
+{% extends "base.html" %} {% block title %} Konto {% endblock %}
 {% block content %}
-<h1>Account</h1>
+<h1>Konto</h1>
 <div class="content-userpage">
   <img
     class="user-picutre"
@@ -8,10 +8,10 @@
     alt="User Icon"
   />
   {% if user.is_authenticated %}
-  <h4 class="username" href="">Username: {{ user.username }}</h4>
+  <h4 class="username" href="">Konto Name: {{ user.username }}</h4>
   <form action="{% url 'logout' %}" method="post">
     {% csrf_token %}
-    <button class="logout-button" type="submit">Log Out</button>
+    <button class="logout-button" type="submit">Abmelden</button>
   </form>
   <p><a href="{% url 'password_change' %}">Passwort ändern</a></p>
 </div>
@@ -19,7 +19,7 @@
 <h2>Du hast dich noch nicht angemeldet</h2>
 <form action="{% url 'login' %}" method="post">
     {% csrf_token %}
-    <button class="logout-button" type="submit">Log In</button>
+    <button class="logout-button" type="submit">Anmelden</button>
   </form>
   <p><a href="{% url 'password_reset' %}">Passwort Vergessen?</a></p>
 {% endif %} {% endblock %}
