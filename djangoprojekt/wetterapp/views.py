@@ -10,6 +10,7 @@ import pytz
 
 def add_favorite(request, city_id):
     if request.method == "POST" and request.user.is_authenticated:
+        # TODO: Fehlerbehandlung, falls Stadt nicht existiert
         city = City.objects.get(id=city_id)
         FavoriteCities.objects.get_or_create(
             user=request.user,
@@ -20,6 +21,7 @@ def add_favorite(request, city_id):
 
 def remove_favorite(request, city_id):
     if request.method == "POST" and request.user.is_authenticated:
+        # TODO: Fehlerbehandlung, falls Stadt nicht existiert
         city = City.objects.get(id=city_id)
         FavoriteCities.objects.filter(
             user=request.user,
@@ -40,6 +42,7 @@ def weather(request):
 
     def get_condition_text(code):
         code = int(code)
+        # TODO: match-case verwenden
         if code == 0:
             return "Klar"
         elif code == 2:
@@ -60,6 +63,7 @@ def weather(request):
             return "Unbekannt"
         
     def get_beaufort(wind_kmh):
+        # TODO: match-case verwenden
         if wind_kmh < 1:
             return 0
         elif wind_kmh <= 5:

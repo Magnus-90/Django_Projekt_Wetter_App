@@ -20,6 +20,7 @@ def get_pollen_data(latitude, longitude):
     responses = openmeteo.weather_api(url, params=params)
 
     response = responses[0]
+    # ? brauchts diesen Code wirklich noch?
     # print(f"Coordinates: {response.Latitude()}°N {response.Longitude()}°E")
     # print(f"Elevation: {response.Elevation()} m asl")
     # print(f"Timezone difference to GMT+0: {response.UtcOffsetSeconds()}s")
@@ -38,6 +39,15 @@ def get_pollen_data(latitude, longitude):
     	inclusive = "left"
     )}
 
+    # TODO: könnte man folgendermassen vereinfachen:
+    # hourly_data.update({
+    #   "alder_pollen": hourly_alder_pollen,
+    #   "birch_pollen": hourly_birch_pollen,
+    #   "grass_pollen": hourly_grass_pollen,
+    #   "mugwort_pollen": hourly_mugwort_pollen,
+    #   "ragweed_pollen": hourly_ragweed_pollen
+    # })
+
     hourly_data["alder_pollen"] = hourly_alder_pollen
     hourly_data["birch_pollen"] = hourly_birch_pollen
     hourly_data["grass_pollen"] = hourly_grass_pollen
@@ -45,6 +55,7 @@ def get_pollen_data(latitude, longitude):
     hourly_data["ragweed_pollen"] = hourly_ragweed_pollen
 
     hourly_dataframe = pd.DataFrame(data = hourly_data)
+    # ? brauchts den Print wirklich noch?
     # print("\nHourly data\n", hourly_dataframe)
     return {
         'coordinates': {

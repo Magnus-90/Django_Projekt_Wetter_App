@@ -5,10 +5,12 @@
     <div class="searchbar">
         <form action="" method="GET">
             <input type="text" name="city" placeholder="Suchfeld" value="{{ search }}">
+            <!-- TODO: hier hats einen kleinen Typo/Syntaxfehler -->
             <button class="flex-center type="submit">Suchen</button>
         </form>
         </div>
     <div class="content-citys">
+        <!-- TODO: die Cities würde ich alphabetisch sortieren -->
         {% for city in cities %}
             <div class="city-item">
                 <div class="city-name flex-center">
@@ -29,6 +31,7 @@
                     </form>
                 </div>
                 {% else %}
+                <!-- TODO: das würde ich hier garnicht anzeigen, solang der User nicht angemeldet ist -->
                 <div class="favorite-button flex-center">
                     <p>
                         Für Favoriten müssen sie angemeldet sein.

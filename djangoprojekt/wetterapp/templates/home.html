@@ -5,6 +5,7 @@
 <div class="content-home">
   <div class="content-home-text">
     <h2>Herzlich Wilkommen auf der Wetterapp.</h2>
+    <!-- TODO: das würde ich nicht als h2 darstellen, ist ja eigentlich ein Text, nicht eine Überschrift -->
     <h2>Hier können sie nachschauen wie das Wetter ist.</h2>
     <img src="{% static 'wetterapp/css/icons/partly-cloudy-day.svg' %}?v=2" alt="Weather Icon" draggable="false">
   </div>
@@ -28,12 +29,14 @@
   {% else %}
   <div class="content-home-last-citys">
     <h3>Letzte Suchergebnisse</h3>
+    <!-- TODO: das würde ich nicht als h3 darstellen, ist ja "nur" ein Infotext, zudem könnte der Login-Button durch einen link direkt im Word "angemeldet" erstetzt werden -->
     <h3>Für dieses Feature muss du angemeldet sein. </h3>
     {% csrf_token %}
   <a href="{% url 'login' %}">Login</a>
   </div>
   <div class="content-home-favorite-citys">
     <h3>Gespeicherte Orte</h3>
+    <!-- TODO: das würde ich nicht als h3 darstellen, ist ja "nur" ein Infotext, zudem könnte der Login-Button durch einen link direkt im Word "angemeldet" erstetzt werden -->
     <h3>Für dieses Feature muss du angemeldet sein.</h3>
     {% csrf_token %}
   <a href="{% url 'login' %}">Login</a>
